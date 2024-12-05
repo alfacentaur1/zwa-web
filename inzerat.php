@@ -72,7 +72,7 @@
             </div>
             <div class='prispevek-uprava'>
                 <a href='upravit.php?id=$current_id' class='prispevek-a'>upravit</a>
-                <a href='' class='prispevek-a'>smazat</a>
+                <a href='deleteAd.php?id=$current_id' class='prispevek-a'>smazat</a>
             </div>
         </div>
     </div>
