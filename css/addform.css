@@ -1,0 +1,147 @@
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around; 
+    width: 60%; 
+    max-width: 800px; 
+    height: auto;
+    padding: 2rem;
+    margin: 2rem auto; 
+    border: none; 
+}
+
+
+h2 {
+    color: white;
+    margin-top: 5vh;
+    margin-bottom: 0;
+    font-size: 2.5rem;
+    padding: 1rem;
+    text-decoration: underline;
+}
+
+form {
+    margin-top:15rem;
+
+}
+fieldset {
+    display:flex;
+    justify-content: center;
+    flex-direction:column;
+    width:50vw;
+    height:75vh;
+    margin:0 auto;
+    
+}
+
+.form-1 {
+    margin-top:20vh;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%; 
+}
+
+input {
+    width:50vw;
+    border-radius:10px;
+    background-color: #303245;
+    border-style:none;
+    border-radius: 10px;
+    color:white;
+    padding-left:6px;
+    height:3.2vw;
+    margin:0.6rem;
+    font-size:1rem;
+}
+
+.submit {
+    background-color: #08d;
+    border-radius:10px;
+    width:16vw;
+    height:4.5vh;
+    border-radius:10px;
+    margin:auto;
+}
+
+textarea {
+
+    border-radius:10px;
+    background-color: #303245;
+    border-style:none;
+    border-radius: 10px;
+    color:white;
+    padding-left:0.1px;
+    padding-top:2px;
+    margin-bottom:2vh;
+}
+
+.submit:hover {
+    opacity:0.4;
+    transition:0.3s;
+    cursor: pointer;
+}
+
+.fieldset {
+    margin-bottom:1.7vh;
+}
+
+.a-role {
+    font-size:1rem;
+    padding-top:1.2rem;
+}
+
+
+select {
+    height:4vh;
+    width:10%;
+    align-items: center;
+    margin:1vh auto;  
+    color:black;
+}
+
+option {
+    color:black;
+}
+
+.prodej {
+    width:100%;
+}
+
+
+
+input, textarea, select {
+    width: 100%; 
+    max-width: 500px; 
+    margin-bottom: 1rem;
+}
+
+#select {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem; 
+}
+
+#img {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.php {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    color:red;
+    font-size: 1rem;
+    font-weight: bold;
+    margin:auto 0;
+}

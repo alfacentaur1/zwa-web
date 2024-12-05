@@ -1,0 +1,123 @@
+
+.main {
+    color:white;
+    margin-top:2rem;
+    display:flex;   
+    flex-wrap:wrap;
+    justify-content: center;
+}
+
+h2 {
+    font-size:2rem;
+    padding:0.5rem;
+    text-decoration: underline;
+}
+
+.prispevek-text {
+    width:100%;
+}
+.prispevek {
+    width:20rem;
+    height: 25rem;
+    background-color: #15172b;
+    border-radius: 13px;
+    display:flex;
+    text-align: center;
+    justify-content: center;
+    margin:2rem;    
+    z-index:1;
+
+}
+
+img {
+    width: 10rem;
+    margin:1.5rem;
+}
+
+.prispevek-uprava  {
+    padding-top:2.5rem;
+}
+.prispevek-uzivatel {
+    padding-top:0.8rem;
+}
+
+/* .prispevek-lokalita {
+} */
+.prispevek-cena {
+    padding-top:0.8rem;
+}
+.prispevek-rozmery {
+    padding-top:0.8rem;
+}
+
+.prispevek-a{
+    padding:0 2rem;
+    border:white solid 1.5px;
+    border-radius:6px;
+    width:100%;
+}
+
+.prispevek-a:hover{
+    color: #08d;
+    border-color: #08d;
+    transition: 0.7s;
+
+}
+
+.nadpis {
+    margin-top: 20vh;
+    font-size:2rem;
+    padding:1rem;
+    text-decoration: underline;
+    text-align: center;
+}
+.prispevek:hover {
+    border:white 1.5px solid;
+    transition:7s;
+}
+
+.a-role {
+    font-size:1rem;
+    padding-top:1.2rem;
+}
+
+.skip {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    width:8%;
+}
+
+.buttons {
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width:100%;
+}
+
+.page-button {
+    width:60%;
+    background-color: #08d;
+    margin:5vh 0;
+    text-align: center;
+    padding:0.5rem;
+    border-radius:10px;
+    height:6vh;
+    padding:auto;
+}
+
+.page-button:hover {
+    opacity:0.4;
+    transition:0.3s;
+}
+.phpdiv {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    color:red;
+}
+
+.php {
+    color:red;
+}

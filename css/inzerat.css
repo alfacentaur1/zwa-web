@@ -1,0 +1,59 @@
+
+
+body {
+    background-color: black;
+    height:150vh;
+}
+
+.inzerat {
+    margin-top:20vh;
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    flex-wrap:wrap;
+    width:50vw;
+    max-height:600vh;
+    border:1px solid white;
+    padding:3rem;
+    border-radius:2rem;
+    background-color: #15172b;
+}
+
+.underline {
+    text-decoration: underline;
+    margin-bottom:0.5rem;
+}
+
+.text-container {
+    display:flex;
+    align-items: center;
+    justify-content:center;
+    flex-direction: column;
+    padding:0.5rem;
+    font-size:1.1rem;
+}
+
+.content-container {
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.prispevek-a{
+    padding:0 2rem;
+    border:white solid 1.5px;
+    border-radius:6px;
+    width:100%;
+}
+
+.prispevek-a:hover{
+    color: #08d;
+    border-color: #08d;
+    transition: 0.7s;
+
+}
+
+.prispevek-uprava  {
+    padding-top:2.5rem;
+}

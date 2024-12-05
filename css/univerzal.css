@@ -1,0 +1,121 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal; 
+    color:white;
+    text-decoration: none;
+}
+
+li {
+    padding:1.4rem;
+    margin:1rem 2rem;
+    font-size:1.5rem;
+    list-style: none;
+    width:4rem;
+    flex-wrap:wrap;
+}
+
+body {
+    background-color: black;
+}
+nav {
+    background-color: #15172b;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width:100%;
+    bottom:0;
+    height:auto;
+    position:sticky;
+    top:0;
+    border-bottom:2px solid white;
+    z-index:10000;
+    flex-wrap:wrap;
+}
+
+ul {
+    display:flex;
+    flex-direction: row;
+    text-decoration: none;
+    flex-wrap:wrap;
+}
+h1 {
+    padding:1rem;
+    font-size: 2.5rem;
+    text-decoration: underline;
+}
+
+.odkazy {
+    font-size: 1rem;
+    padding:0.4rem;
+    padding-top:1.7rem;
+}
+
+a:hover{
+    color:#08d;
+    transition: 0.3s;
+    opacity:0.7;
+}
+
+/* print styles */
+
+@media print {
+    body{ 
+        background-color: white;
+        color:black;
+        width:100vw;
+        text-decoration-color: black;
+    
+    }
+    .nav {
+        display:none;
+    }
+
+    .buttons {
+        display:none;
+    }
+
+    .prispevek-uprava {
+        display:none;
+    }
+    .main-container {
+        border:1px black solid;
+        width:60vw;
+        page-break-inside: avoid;
+        color:black;
+    }
+
+    .prispevek-text {
+        border:black 1px solid;
+        width:45vw;
+        border-radius:12px;
+        page-break-inside: avoid;
+    }
+
+    .uzivatel {
+        page-break-inside: avoid;
+        width: 30vw;
+        height:8vh;
+        border:1px black solid;
+    }
+
+    .container-uzivatelu {
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .tlacitko {
+        display:none;
+    }
+    h2, .nadpis {
+        margin-top:0;
+        text-decoration: underline;
+        text-decoration-color:black;
+    }
+}

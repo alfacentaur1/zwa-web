@@ -1,0 +1,198 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal; 
+}
+
+body {
+    background-color: #000;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height:100vh;
+    max-height:100vh;
+    max-width:100vw;
+    
+}
+
+form {
+    background-color: #15172b;
+    width:40%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:90vh;
+    padding:3px;
+    border-radius: 15px;
+    -webkit-box-shadow:0px 0px 27px 3px rgba(255,255,255,0.43);
+    -moz-box-shadow: 0px 0px 27px 3px rgba(255,255,255,0.43);
+    box-shadow: 0px 0px 27px 3px rgba(255,255,255,0.43);
+}
+
+.main {
+    display:flex;
+    width: 80%;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    
+
+}
+
+.intro {
+    margin-left:0;
+    padding:0 2rem;
+}
+fieldset {
+    display:flex;
+    align-items:center;
+    justify-content: center;
+    flex-direction: column;
+    border-style:none;
+    height:90vh;
+    width:60vw;
+    
+}
+
+h1,h2,p,input,label,.submit {
+    padding:8px;
+}
+
+input {
+    background-color: #303245;
+    border-style:none;
+    border-radius: 10px;
+    color:white;
+}
+
+.submit {
+    background-color: #08d;
+    border-radius:10px;
+    width:8vw;
+    margin-bottom:0.7rem;
+    margin-top:0.3rem;
+    margin:0 auto;
+}
+
+.submit:hover {
+    opacity:0.4;
+    transition:0.3s;
+    cursor: pointer;
+}
+
+a {
+    text-decoration: none;
+    color:#08d;
+}
+a:hover {
+    opacity:0.4;
+    transition:0.3s;
+}
+
+h1,h2,label,p {
+    color:white;
+}
+
+a:visited {
+    opacity:0.8;
+}
+
+.intro {
+    padding-right:5rem;
+    font-size:1.7rem;
+}
+
+.rentco{
+    text-decoration: underline;
+}
+
+.form {
+    display:flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction:column;
+    margin:0.5rem;
+}
+
+/* print styles */
+
+@media print {
+    body {
+        background-color: white;
+        color:black;
+    }
+
+    form {
+        border:1px black solid ;
+    }
+}
+
+/* error pri vyplnovani emailu */
+.chyba {
+    border:red 1px solid;
+}
+
+.chyba:focus {
+    outline:none;
+    border:1px red solid !important;
+}
+
+
+
+input:focus  {
+    outline:none;
+    outline:1px solid white;
+
+}
+
+/* error pri vyplnovani hesla - hesla se neshoduji */
+
+#error_hesla {
+    display:none;
+    color:red;
+}
+
+.error_hesla {
+    display:block !important;
+}
+
+.password {
+    border:red 1px solid !important;
+}
+
+.password:focus {
+    outline:none;
+    outline:red 1px solid;
+}
+
+
+.php {
+    display:flex;
+    justify-content: center;
+    text-align:center;
+    align-items: center;
+    color:red;
+    font-size: 1rem;
+    font-weight: bold;
+    margin:auto 0;
+}
+
+.hidden {
+    display:none;
+    font-weight: bold;
+    margin:auto 0;
+}
+
+.ajax {
+    display: inline !important;
+    color:red !important; 
+    font-size: 1rem;
+
+}

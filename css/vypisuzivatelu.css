@@ -1,0 +1,57 @@
+
+
+#container-uzivatelu {
+    width:99vw;
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content:center;
+    margin-top:0vh;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.uzivatel-text {
+    padding:0.5rem;
+
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+#container-uzivatelu .uzivatel.uzivatel {
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    padding:5px;
+}
+
+.submit {
+    background-color: #08d;
+    border-radius:10px;
+    width:8vw;
+    height:4.5vh;
+    border-radius:10px;
+    margin:auto;
+    margin-top:5vh;
+}
+
+select, option {
+    color:black;
+}
+
+
+.submit:hover{
+    opacity:0.3;
+    transition: 0.3s;
+}
+
+.a-role {
+    font-size:1rem;
+    padding-top:1.2rem;
+}
