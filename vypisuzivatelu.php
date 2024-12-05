@@ -1,14 +1,7 @@
 <?php
     require "functions.php";
     $users = loadUsers();
-    print_r($users);
-    
-//   foreach ($users as &$user) {
-//     if ($user['id'] == $id) {
-//       $user['name'] = $name;
-//       $user["age"] = $age;
-//       break;
-    print_r($users);
+
     if (isset($_POST["submit"]) && !empty($users)) {
         foreach ($users as &$user) {
             $username = $user["username"];
@@ -16,7 +9,9 @@
                 $user["role"] = $_POST[$username]; // Aktualizace role
             }
         }
-        saveRoles($users); // Uložení aktualizovaných uživatelů
+        saveRoles($users);
+        $users = loadUsers();
+        // Uložení aktualizovaných uživatelů
     }
 
 ?>
@@ -41,7 +36,6 @@ foreach ($users as $user) {
     $id = htmlspecialchars($user["id"]);
     $username = htmlspecialchars($user["username"]); 
     $role = htmlspecialchars($user["role"]); 
-    print_r($user);
     echo "
 
         <div class='uzivatel'>
