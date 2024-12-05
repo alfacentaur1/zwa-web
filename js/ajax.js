@@ -21,6 +21,7 @@ function validateUsername(e) {
     if (e.target.responseText == "used") {
         p.classList.add("ajax");
         name.classList.add("chyba");
+        alert("chyba");
     }else if (e.target.responseText == "not_used"){
         p.classList.remove("ajax");
         name.classList.remove("chyba");

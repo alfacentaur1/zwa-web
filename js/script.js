@@ -3,7 +3,6 @@ function isEmailValid(e) {
     if (test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1) {
         test.classList.add("chyba");
         e.preventDefault();
-  
         
     }
 }
@@ -26,6 +25,7 @@ function arePasswordsSame(e) {
     }
 
     else {
+        console.log(pswrds);
         e.preventDefault();
         let p = document.getElementById("error_hesla");
         p.classList.add("error_hesla");
@@ -35,8 +35,9 @@ function arePasswordsSame(e) {
 }
 
 function isFormSubmittable(e) {
-    isEmailValid(e);
     arePasswordsSame(e);
+    isEmailValid(e);
+
 }
 
 function main() {
