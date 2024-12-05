@@ -38,11 +38,49 @@ if (isset($_POST["submit"])) {
 
     // Pokud nejsou chyby, pokračujeme
     if (empty($errors)) {
-        addAd($data); // Uložení inzerátu
-        header("Location: index.php?php=uspesne pridano");
-        exit();
+        $new_width = 300;
+        $new_height = 200;
+        $uploadFilePath = "./images/" . $ad_id . ".jpg"; // Uložení jako JPG
+    
+        // Zpracování obrázku
+        $uploaded_img = $_FILES['img']['tmp_name'];
+        list($width, $height, $type) = getimagesize($uploaded_img);
+    
+        switch ($type) {
+            case IMAGETYPE_JPEG:
+                $srcImage = imagecreatefromjpeg($uploaded_img);
+                break;
+            case IMAGETYPE_PNG:
+                $srcImage = imagecreatefrompng($uploaded_img);
+                break;
+            case IMAGETYPE_GIF:
+                $srcImage = imagecreatefromgif($uploaded_img);
+                break;
+            default:
+                $errors[] = "Neplatný formát obrázku.";
+                break;
+        }
+    
+        // Pokud je formát platný, změňte velikost
+        if (empty($errors)) {
+            $newImage = imagecreatetruecolor($new_width, $new_height);
+            imagecopyresampled($newImage, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+    
+            // Uložení nového obrázku
+            imagejpeg($newImage, $uploadFilePath, 90);
+    
+            // Uvolnění paměti
+            imagedestroy($srcImage);
+            imagedestroy($newImage);
+    
+            // Pokračování s uložením inzerátu
+            addAd($data); // Uložení inzerátu
+            header("Location: index.php?php=uspesne pridano");
+            exit();
+        }
     }
 }
+    
 ?>
 
 
@@ -128,7 +166,7 @@ if (isset($_POST["submit"])) {
                     </textarea>
                 <div class="form" id="img">
                     <label for="img-input">Foto</label>
-                    <input type="file" name="img" id="img-input" >
+                    <input type="file" name="img" id="img-input" accept="image/*">
                 </div>
                 </div>
                 <div class="form">

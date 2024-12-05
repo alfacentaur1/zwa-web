@@ -42,7 +42,7 @@
                 echo "
     <div class='content-container'>
     <div class='inzerat'>
-            <img src='' alt='obrazek-inzeratu'>
+            <img src='images/$current_id' alt='obrazek-inzeratu'>
             <div class='text-container'>
 
             </div>

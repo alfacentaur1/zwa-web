@@ -70,7 +70,7 @@
                                     <h2>$prodej</h2>
                                 </div>
                             <div class='prispevek-img'>
-                                <img src='' alt='obrazek-inzeratu'>
+                                <img src='images/$id' alt='obrazek-inzeratu'>
                             </div>
                             <div class='prispevek-lokalita'>
                                 <p>Lokalita: $lokalita</p>
