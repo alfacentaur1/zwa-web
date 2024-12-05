@@ -1,0 +1,25 @@
+name: Count Lines of Code
+
+on:
+  push:
+    branches:
+      - main  
+  pull_request:
+    branches:
+      - main  
+
+jobs:
+  count-lines:
+    runs-on: ubuntu-latest  
+
+    steps:
+    - name: Checkout the repository
+      uses: actions/checkout@v3  
+
+    - name: Install cloc
+      run: |
+        sudo apt-get install cloc  # Nainstaluje nástroj cloc
+
+    - name: Count lines of code
+      run: |
+        cloc .  # Spustí cloc v aktuálním adresáři repozitáře
