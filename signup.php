@@ -18,8 +18,7 @@
         if(isAvalaible($email,$username) && $validated_email && $are_passwords_same && $validated_password
         &&$validated_username == "good"){
             addUser($email,$username,$password,$role);
-            header("Location: index.php");
-            exit;
+            header("Location: index.php?php=vitejte");
         }
         
     }else {

@@ -11,6 +11,7 @@
         }
         saveRoles($users);
         $users = loadUsers();
+        header("Location: index.php?php=uspesne zmeneno");
         // Uložení aktualizovaných uživatelů
     }
 
