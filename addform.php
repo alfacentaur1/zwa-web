@@ -172,7 +172,7 @@ if (isset($_POST["submit"])) {
                 <div class="form">
                      <label for="prodej">Chci</label>       
                      <select name="prodej" id="prodej" class="prodej">
-                <option value="pronajimat" <?php echo (isset($_POST["prodej"]) && $_POST["prodej"] === "pronajimat") ? "selected" : ""; ?>>pronajímat</option>
+                <option value="pronajímat" <?php echo (isset($_POST["prodej"]) && ($_POST["prodej"] === "pronajímat" || $_POST["prodej"] === "pronajimat")) ? "selected" : ""; ?>>pronajímat</option>
                 <option value="prodat" <?php echo (isset($_POST["prodej"]) && $_POST["prodej"] === "prodat") ? "selected" : ""; ?>>prodat</option>
             </select>
 
