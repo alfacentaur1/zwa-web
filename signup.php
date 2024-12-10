@@ -37,6 +37,9 @@
     <link href="css/forms.css" rel="stylesheet">
     <script src="js/script.js" defer></script> 
     <script src="js/ajax.js" defer></script> 
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
 </head>
 <body>
     <div class="main">
