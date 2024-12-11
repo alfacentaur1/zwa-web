@@ -162,8 +162,7 @@ if (isset($_GET["id"])) {
                 </div>
                 <div class="form">
                     <label for="popis" class="fieldset">Popis</label>
-                    <textarea name="popis" id="popis" cols="94" rows="15">
-                    <?php
+                    <textarea name="popis" id="popis" cols="94" rows="15"><?php
                     if(isset($_POST["popis"])){
                         echo htmlspecialchars($_POST["popis"]);
                     }elseif(isset($popis)) {
