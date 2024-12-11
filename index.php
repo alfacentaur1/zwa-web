@@ -85,10 +85,6 @@
         $totalPages = ceil($totalAds / $limit);
 
         echo '<div class="buttons">';
-        //    if ($page > 1) {
-        //        echo '<a href="?limit=' . $limit . '&page=1"></a> ';
-        //        echo '<a href="?limit=' . $limit . '&page=' . ($page - 1) . '"></a> ';
-        //    }
 
            for ($i = 1; $i <= $totalPages; $i++) {
                if ($i == $page) { //kdyz jsme na aktualni strance, nejde kliknout
