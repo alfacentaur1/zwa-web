@@ -90,10 +90,10 @@ if (isset($_GET["id"])) {
 
         <?php
     } else {
-        echo "<h1>Inzerát s daným ID nebyl nalezen</h1>";
+        echo "Inzerát s daným ID nebyl nalezen";
     }
 } else {
-    echo "<h1>Inzerát s daným ID nebyl nalezen</h1>";
+    echo "Inzerát s daným ID nebyl nalezen";
 }
 ?>
 
