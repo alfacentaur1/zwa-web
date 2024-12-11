@@ -21,12 +21,8 @@
             header("Location: index.php?php=vitejte");
         }
         
-    }else {
-        //nic
     }
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="cs">
@@ -106,7 +102,6 @@
                             echo "<p class='php'>Heslo musí mít min. 1 speciální znak a min. 1 velké písmeno</p>";
                             }
                         }
-
                     }
                     if(isset($validated_email) && !$validated_email) {
                         if($validated_email == "taken") {

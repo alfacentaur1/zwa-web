@@ -74,8 +74,10 @@ if (isset($_GET["id"])) {
             $prodej = $ad["prodej"];
             $found = true;
         }}
-        if(!$found) {
+        if(isset($found) && !$found) {
             $errors[] = "nenalazen inzerát s daným id";
+        }else{
+            header("index.php?php=inzerat s daným id neexistuje");
         }
 
     ?>
@@ -97,7 +99,11 @@ if (isset($_GET["id"])) {
 <body>
 <?php require "nav.php" ?>
     <h2 >Upravení inzerátu</h2>
-    <?php 
+    <?php if(!isset($_GET["id"])){
+
+    }
+    
+    $errors[] = "nenalazen inzerát s daným id"; 
     if(isset($errors)){
         foreach($errors as $error){
             echo "<p class='php'>$error</p>";
