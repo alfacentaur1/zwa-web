@@ -163,8 +163,7 @@ if (isset($_POST["submit"])) {
                     if(isset($_POST["popis"])){
                         echo htmlspecialchars($_POST["popis"]);
                     }
-                    ?>                     
-                    </textarea>
+                    ?></textarea>
                 <div class="form" id="img">
                     <label for="img-input">Foto</label>
                     <input type="file" name="img" id="img-input" accept="image/*">

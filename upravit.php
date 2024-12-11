@@ -50,7 +50,8 @@
                     $ad["prodej"] = $_POST["prodej"];
                     $found = true;
                     saveAd($ads);
-                    header("Location: index.php?php=uspesne upraveno ");
+                    $redirect = $ad["id"];
+                    header("Location: inzerat.php?id=$redirect");
                     break; 
                     
             }
@@ -168,8 +169,7 @@ if (isset($_GET["id"])) {
                     }elseif(isset($popis)) {
                         echo htmlspecialchars($popis);
                     }
-                    ?>                     
-                    </textarea>
+                    ?></textarea>
                 </div>
                 <div class="form">
                      <label for="prodej">Chci</label>       
