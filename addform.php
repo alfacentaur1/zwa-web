@@ -1,5 +1,9 @@
 <?php
-require "functions.php";
+require "header.php";
+if(!isset($_SESSION["username"])){
+    header("Location: login.php?error=je nutne prihlaseni");
+}
+
 
 $errors = []; // Pole pro ukládání chyb
 
@@ -111,7 +115,13 @@ if (isset($_POST["submit"])) {
         <form action="" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <div class="form">
-                    <input type="hidden" name ="user_id" value ="12" >
+                    <!-- tady bude id usera ze session -->
+                    <input type="hidden" name ="user_id" value =<?php 
+                    if(isset($current_user)){
+                        echo $current_user["id"];
+                    }
+                    
+                    ?>>
                     <input type="hidden" name="ad_id" value=<?php echo strval(uniqid())?>>
                     <label for="lokalita">Lokalita</label>
                     <input type="text" name="lokalita" id="lokalita"

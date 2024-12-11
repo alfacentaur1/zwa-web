@@ -1,5 +1,5 @@
 <?php
-
+    session_start();
     require "functions.php";
 
     if(isset($_POST["submit"])) {
@@ -8,17 +8,22 @@
         $password = $_POST["password"];
         $password_znovu = $_POST["password_znovu"];
         $role = $_POST["role"];
+        
+        $users = loadUsers();
 
         //validace username
         $validated_username = validate_username($username); //"good" kdyz je to spravne, jinak "len"
         $validated_password = validate_password($password); //"len" pri delce, "special" pri znaku jinak true
         $validated_email = validate_email($email); // true kdyz je spravny
         $are_passwords_same = are_passwords_same($password,$password_znovu); //true spravne, false spatne
-        $users = loadUsers();
+
         if(isAvalaible($email,$username) && $validated_email && $are_passwords_same && $validated_password
         &&$validated_username == "good"){
-            addUser($email,$username,$password,$role);
-            header("Location: index.php?php=vitejte");
+            $hashed_password = password_hash($password,PASSWORD_DEFAULT);
+            addUser($email,$username,$hashed_password,$role);
+            $_SESSION["username"] = $username;
+            header("Location: index.php");
+            
         }
         
     }

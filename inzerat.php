@@ -1,6 +1,5 @@
 <?php
-require "functions.php";
-$ads = loadAds();
+require "header.php";
 ?>
 
 <!DOCTYPE html>
@@ -20,7 +19,9 @@ $ads = loadAds();
 
 <?php
 if (isset($_GET["id"])) {
-    $current_id = $_GET["id"];
+    $current_id = $_GET["id"]; //id příspěvku
+    $ad_user = null;
+    $ads = loadAds();
 
     // Searching ads
     $foundAd = false;
@@ -31,6 +32,7 @@ if (isset($_GET["id"])) {
         }
     }
 
+
     if ($foundAd) {
         $prodej = htmlspecialchars($foundAd["prodej"]);
         $lokalita = htmlspecialchars($foundAd["lokalita"]);
@@ -38,6 +40,14 @@ if (isset($_GET["id"])) {
         $mena = htmlspecialchars($foundAd["mena"]);
         $rozmery = htmlspecialchars($foundAd["rozmery"]);
         $popis = htmlspecialchars($foundAd["popis"]);
+            //prohledam usery, ktery se bude shodovat s userid
+    
+    foreach($users as $user) {
+        if($user["id"] == $foundAd["user_id"]){
+            $ad_user = $user;
+            break;
+        }
+    }
         ?>
 
         <div class="content-container">
@@ -73,18 +83,33 @@ if (isset($_GET["id"])) {
 
                 <div class="text-container">
                     <p class="underline">Uživatel</p>
-                    <p>Filip K</p>
+                    <p>
+                    <?php
+                     if(isset($ad_user)){
+                        echo htmlspecialchars($ad_user["username"]);
+                     }
+                     ?>
+
+                    </p>
                 </div>
 
                 <div class="text-container">
                     <p class="underline">Email</p>
-                    <p>kopecfi3@student.cvut.cz</p>
+                    <p><?php
+                     if(isset($ad_user["email"])){
+                        echo htmlspecialchars($ad_user["email"]);
+                     }
+                     ?></p>
                 </div>
-
+                <?php
+                if(isset($current_user) && isset($ad_user)&& (($current_user["id"] == $ad_user["id"]) || $current_user["role"] == "admin")){?>
                 <div class="prispevek-uprava">
                     <a href="upravit.php?id=<?php echo $current_id; ?>" class="prispevek-a">upravit</a>
                     <a href="deleteAd.php?id=<?php echo $current_id; ?>" class="prispevek-a">smazat</a>
                 </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
 

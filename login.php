@@ -1,32 +1,30 @@
 <?php
     require "functions.php";
-
+    session_start();
     if(isset($_POST["submit"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];
     $users = loadUsers();
-    $logged_in = True;
+    $logged_in = false;
 
         //validace username
-        //TODO
-        //$is_username_correct (kdyz je prazdne nebo spatne => false)
-        //is_password_correct (kdyz je prazdne, nebo spatne => false)
-        
+        if(isset($_POST["submit"]) ){
         if (!empty($username) && !empty($password)) {
-            $can_log_in = userLogin($username, $password, $users);
-            if ($can_log_in) {
-                // prihlaseni je uspesne
-                header("Location: index.php?php=vitejte");
-                exit;
-            } else {
-                $logged_in = false; // spatne udaje
+            foreach($users as $user){
+                if ($user["username"] == $username) {
+                    if (password_verify($password,$user["password"])){
+                        $logged_in = true;
+                        $_SESSION["username"] = $username;
+                        header("Location: index.php");
+                        exit;
+                    }
+                }
             }
         } else {
             $logged_in = false; // nevyplneno
         }
-    }else {
-        //nic
     }
+}
 
 ?>
 
@@ -84,6 +82,10 @@
                                 echo "<p class='php'>Špatně zadaný username nebo heslo</p>";
                             }
                         }
+                    }
+                    if(isset($_GET["error"])){
+                        $message = $_GET["error"];
+                        echo "<p class='php'>$message</p>";
                     }
                     
                 ?>

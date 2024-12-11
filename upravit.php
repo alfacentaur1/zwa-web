@@ -1,8 +1,8 @@
 <?php
     require "functions.php";
+    require "header.php";
     //TODO
-    // pres session user id
-    //
+
     $ads = loadAds();
     $data = [];
     $errors = [];
@@ -48,7 +48,6 @@
                     $ad["rozmery"] = $_POST["rozmery"];
                     $ad["popis"] = trim($_POST["popis"]);
                     $ad["prodej"] = $_POST["prodej"];
-                    $ad["user_id"] = $_POST["user_id"];
                     $found = true;
                     saveAd($ads);
                     header("Location: index.php?php=uspesne upraveno ");

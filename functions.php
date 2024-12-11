@@ -130,8 +130,7 @@
     //pridame usera, kdyz to jde, vratime true, jinak vratime false
     function addUser($email,$username,$password,$role) {
         $users = loadUsers();
-        
-        
+
         $users[] = [
             "id" => uniqid(),
             "email" => $email,
@@ -213,6 +212,16 @@
             return array_slice($db, $offset);
         }
         return array_slice($db, $offset, $limit);
+    }
+
+    function getUser($username){
+        $users = loadUsers();
+
+        foreach($users as $user){
+            if ($user["username"] == $username){
+                return $user;
+            }
+        }
     }
 
 

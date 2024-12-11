@@ -1,6 +1,9 @@
 <?php
     require "functions.php";
-    $users = loadUsers();
+    require "header.php";
+    if(!isset($_SESSION["username"])||!isset($current_user) || $current_user["role"] != "admin"){
+        header("Location: login.php?error=je nutne prihlaseni");
+    }
 
     if (isset($_POST["submit"]) && !empty($users)) {
         foreach ($users as &$user) {

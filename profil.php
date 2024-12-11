@@ -1,3 +1,10 @@
+<?php
+    require "header.php";
+    if(!isset($_SESSION["username"])){
+        header("Location: login.php?error=je nutne prihlaseni");
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -11,20 +18,23 @@
     <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
 </head>
 <body>
-<?php require "nav.php" ?>
+<?php 
+    require "nav.php" ;
+
+?>
     <div class="upper-container">
         <div class="main-container">
             <div>
                 <p class="underline">Uživatelské jméno</p>
-                <p>Filip Kopecký</p>
+                <p><?=htmlspecialchars($current_user["username"])?></p>
             </div>
             <div>
                 <p class="underline">Email</p>
-                <p>kopecfi3@student.cvut.cz</p>
+                <p><?=htmlspecialchars($current_user["username"])?></p>
             </div>
             <div>
                 <p class="underline">Role</p>
-                <p>admin</p>
+                <p><?=htmlspecialchars($current_user["role"])?></p>
             </div>
         </div>
     </div>

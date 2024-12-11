@@ -18,7 +18,7 @@ body {
     text-align: center;
     height:100vh;
     max-height:100vh;
-    max-width:100vw;
+    max-width:100%;
     
 }
 
@@ -195,4 +195,9 @@ input:focus  {
     color:red !important; 
     font-size: 1rem;
 
+}
+
+p.php {
+    margin:0;
+    padding:0;
 }
