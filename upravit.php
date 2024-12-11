@@ -22,7 +22,7 @@
             "rozmery" => $_POST["rozmery"],
             "popis" => trim($_POST["popis"]),
             "prodej" => $_POST["prodej"],
-            "user_id" => $_POST["user_id"]
+            // "user_id" => $_POST["user_id"]
             
         ];
  
@@ -117,12 +117,12 @@ if (isset($_GET["id"])) {
         <form action="" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <div class="form">
-                    <input type="hidden" name ="user_id" value ="12" >
+                    <!-- <input type="hidden" name ="user_id" value ="12" > -->
                     <input type="hidden" name="ad_id" value=<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>
   
                     >
                     <label for="lokalita">Lokalita</label>
-                    <input type="text" name="lokalita" id="lokalita"
+                    <input autocomplete = "off" type="text" name="lokalita" id="lokalita"
                     <?php
                         if(isset($_POST["lokalita"] )){
                             echo "value='" .htmlspecialchars($_POST["lokalita"])."'";
@@ -134,7 +134,7 @@ if (isset($_GET["id"])) {
                 <div class="form">
                     <div class="form" id="select">
                         <label for="cena">Cena</label>
-                        <input type="text" name="cena" id="cena"
+                        <input autocomplete = "off" type="text" name="cena" id="cena"
                         <?php
                         if(isset($_POST["cena"])){
                             echo "value='" .htmlspecialchars($_POST["cena"])."'";
@@ -150,7 +150,7 @@ if (isset($_GET["id"])) {
                     </div>
                 <div class="form">
                     <label for="rozmery">Rozměry(m2)</label>
-                    <input type="text" name="rozmery" id="rozmery" 
+                    <input autocomplete = "off" type="text" name="rozmery" id="rozmery" 
                     <?php
                     if(isset($_POST["rozmery"])){
                         echo "value='" .htmlspecialchars($_POST["rozmery"])."'";

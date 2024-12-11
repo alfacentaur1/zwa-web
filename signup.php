@@ -58,7 +58,7 @@
                 </div>
                 <div class="form">
                     <label for="username" >Uživatelské jméno</label>
-                    <input type="text" id="username" name="username"
+                    <input autocomplete = "off" type="text" id="username" name="username"
                     <?php
                         if(isset($username)){
                             echo "value='" .htmlspecialchars($username)."'";
@@ -69,7 +69,7 @@
                 </div>
                 <div class="form">
                     <label for="email">Email</label>
-                    <input type="email" id="email" name="email" 
+                    <input autocomplete = "off" type="email" id="email" name="email" 
                     <?php
                         if(isset($email)){
                             echo "value='" .htmlspecialchars($email)."'";

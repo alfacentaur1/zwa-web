@@ -56,7 +56,7 @@
                     <h2>Vítejte</h2>
                 </div>
                 <div class="form">
-                    <label for="username">Uživatelské jméno</label>
+                    <label autocomplete = "off" for="username">Uživatelské jméno</label>
                     <input type="text" name="username" id="username" 
                     
                     <?php
