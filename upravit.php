@@ -5,6 +5,7 @@
     //
     $ads = loadAds();
     $data = [];
+    $errors = [];
     if(isset($_POST["submit"])) {
         $ad_id = $_POST["ad_id"];
         if(isset($_GET["id"])){
@@ -100,10 +101,10 @@ if (isset($_GET["id"])) {
 <?php require "nav.php" ?>
     <h2 >Upravení inzerátu</h2>
     <?php if(!isset($_GET["id"])){
-
+        $errors[] = "nenalazen inzerát s daným id"; 
     }
     
-    $errors[] = "nenalazen inzerát s daným id"; 
+    
     if(isset($errors)){
         foreach($errors as $error){
             echo "<p class='php'>$error</p>";
