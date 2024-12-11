@@ -102,18 +102,6 @@ if (isset($_POST["submit"])) {
 <?php require "nav.php" ?>
     <h2 >Přidání inzerátu</h2>
     <?php 
-        // if (isset($validate_all) && !$validate_all) {
-        //     echo "<p class='php'>Všechna pole musí být vyplněna</p>";
-        // } 
-        // if (isset($_FILES["img"]) && $_FILES["img"]["error"] !== UPLOAD_ERR_OK) {
-        //     echo "<p class='php'>Musíte nahrát obrázek</p>";
-        //         }
-        // if (isset($is_right_format) && !$is_right_format) {
-        //     echo "<p class='php'>Obrázek musí být ve formátu JPEG nebo PNG</p>";
-        // } 
-        // if (isset($is_price_size_right_format) && !$is_price_size_right_format) {
-        //     echo "<p class='php'>Cena a rozměry musí být čísla větší než 0</p>";
-        // }
     foreach($errors as $error){
         echo "<p class='php'>$error</p>";
     }

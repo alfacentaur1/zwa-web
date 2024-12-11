@@ -13,8 +13,32 @@
             $my_id = null;
         }
 
-        
-        $found = false;
+        $data = [
+            "id" => $ad_id,
+            "lokalita" => $_POST["lokalita"],
+            "cena" => $_POST["cena"],
+            "mena" => $_POST["mena"],
+            "rozmery" => $_POST["rozmery"],
+            "popis" => trim($_POST["popis"]),
+            "prodej" => $_POST["prodej"],
+            "user_id" => $_POST["user_id"]
+            
+        ];
+ 
+         $validate_all = validate_all($data);
+         $is_price_size_right_format = price_size_check($_POST["cena"],$_POST["rozmery"]);
+    
+        $errors = [];
+
+        //hledame errory
+        if (isset($validate_all) && !validate_all($data)) {
+            $errors[] = "Všechna pole musí být vyplněna.";
+        }
+        if (isset($is_price_size_right_format) && !price_size_check($_POST["cena"], $_POST["rozmery"])) {
+            $errors[] = "Cena a rozměry musí být čísla větší než 0.";
+        }
+        if(empty($errors)) {
+            $found = false;
             foreach ($ads as &$ad) {
                 if ($ad["id"] == $my_id) {
                     $ad["lokalita"] = trim($_POST["lokalita"]);
@@ -30,55 +54,30 @@
                     break; 
                     
             }
-        
-        if (!$found) {
+        }if (!$found) {
             $errors[] = "Nenalezen inzerát s daným ID.";
         }
     }
- 
-         $validate_all = validate_all($data);
-         $is_price_size_right_format = price_size_check($_POST["cena"],$_POST["rozmery"]);
     
-        $errors = [];
 
-        //hledame errory
-        if (isset($validate_all) && !validate_all($data)) {
-            $errors[] = "Všechna pole musí být vyplněna.";
+   
+}
+if (isset($_GET["id"])) {
+    $my_id = $_GET["id"];
+    $found = false;
+    foreach ($ads as &$ad) {
+            $lokalita = $ad["lokalita"];
+            $cena = $ad["cena"];
+            $mena = $ad["mena"];
+            $rozmery = $ad["rozmery"];
+            $popis = $ad["popis"];
+            $prodej = $ad["prodej"];
+            $found = true;
+        }}
+        if(!$found) {
+            $errors[] = "nenalazen inzerát s daným id";
         }
-        if (isset($is_price_size_right_format) && !price_size_check($_POST["cena"], $_POST["rozmery"])) {
-            $errors[] = "Cena a rozměry musí být čísla větší než 0.";
-        }
-        //pridame do db
-        if(empty($errors)) {
 
-        //     foreach ($ads as &$ad) {
-        //       if ($ad['id'] == $my_id) {
-        //         $ad[] = $name;
-        //         $ad[] = $age;
-        //         break;
-        //       }
-        //     } 
-        //   }
-
-        }
-    }
-
-    if (isset($_GET["id"])) {
-        $my_id = $_GET["id"];
-        $found = false;
-        foreach ($ads as &$ad) {
-                $lokalita = $ad["lokalita"];
-                $cena = $ad["cena"];
-                $mena = $ad["mena"];
-                $rozmery = $ad["rozmery"];
-                $popis = $ad["popis"];
-                $prodej = $ad["prodej"];
-                $found = true;
-            }}
-            if(!$found) {
-                $errors[] = "nenalazen inzerát s daným id";
-            }
-         
     ?>
 
 
