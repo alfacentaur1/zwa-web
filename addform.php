@@ -1,7 +1,7 @@
 <?php
 require "header.php";
 if(!isset($_SESSION["username"])){
-    header("Location: login.php?error=je nutne prihlaseni");
+    header("Location: login.php?error=Je nutné přihlášení.");
 }
 
 

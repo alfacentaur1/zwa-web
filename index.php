@@ -29,7 +29,7 @@
     <?php require "nav.php" ?>
     <?php 
         // Nastavení limitu (počet záznamů na stránku) a aktuální stránky
-        $limit = filter_input(INPUT_GET, 'limit', FILTER_VALIDATE_INT, ["options" => ["default" => 5, "min_range" => 1]]);
+        $limit = filter_input(INPUT_GET, 'limit', FILTER_VALIDATE_INT, ["options" => ["default" => 4, "min_range" => 1]]);
         $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, ["options" => ["default" => 1, "min_range" => 1, "max_range" => ceil(getCount($ads)/$limit)]]);
         $offset = ($page - 1) * $limit;
 
