@@ -6,11 +6,6 @@
         if(strlen(trim($username)) < 6 ) {
             return "len";
         }
-        // if($username in db) {
-        //     //username already in db
-        // }
-
-        //all is good
         else {return "good";}
     }
 
