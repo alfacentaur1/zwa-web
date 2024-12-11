@@ -204,6 +204,16 @@
         file_put_contents("inzeraty.json", $str);
       }
 
+    function getCount($db){
+        return count($db);
+    }
+
+    function listAds($db,$limit = null, $offset = 0) {
+        if ($limit === null) {
+            return array_slice($db, $offset);
+        }
+        return array_slice($db, $offset, $limit);
+    }
 
 
 ?>

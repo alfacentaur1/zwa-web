@@ -13,9 +13,6 @@
 <body>
 <?php require "nav.php" ?>
     <div class="upper-container">
-        <div class="profile-pic">
-            <img src="images/images.jpg" alt="profilova-fotka">
-        </div>
         <div class="main-container">
             <div>
                 <p class="underline">Uživatelské jméno</p>

@@ -103,7 +103,7 @@ img {
     text-align: center;
     padding:0.5rem;
     border-radius:10px;
-    height:6vh;
+    height:4%;
     padding:auto;
 }
 
@@ -120,4 +120,48 @@ img {
 
 .php {
     color:red;
+}
+
+.empty {
+    color:red;
+    margin:auto;
+    justify-content: center;
+    align-items: center;
+}
+
+
+
+.buttons {
+    display: flex;
+    flex-wrap:wrap; 
+    height:20%; 
+    gap: 4%;
+    
+}
+.buttons a, .buttons span {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:3%;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+.buttons a {
+    background-color: #007bff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.buttons a:hover {
+    background-color: #0056b3;
+    box-shadow: 0 6px 8px rgba(0, 0, 0, 0.5);
+}
+.buttons span {
+    background-color: #2c2c2c;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+    cursor: default;
 }
