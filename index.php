@@ -32,7 +32,7 @@
 
     $ads_limit = listAds($ads,$limit, $offset);
     if (isset($_GET["php"])){
-         $message = $_GET["php"];
+         $message = htmlspecialchars($_GET["php"]);
         echo "<div class='phpdiv'></div><p class='php'>$message</p></div>";
     }
     
