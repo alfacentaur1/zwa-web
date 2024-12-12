@@ -102,14 +102,19 @@ if (isset($_GET["id"])) {
                      ?></p>
                 </div>
                 <?php
-                if(isset($current_user) && isset($ad_user)&& (($current_user["id"] == $ad_user["id"]) || $current_user["role"] == "admin")){?>
+                if(isset($current_user) && isset($ad_user)&& (($current_user["id"] == $ad_user["id"]))){?>
                 <div class="prispevek-uprava">
                     <a href="upravit.php?id=<?php echo $current_id; ?>" class="prispevek-a">upravit</a>
                     <a href="deleteAd.php?id=<?php echo $current_id; ?>" class="prispevek-a">smazat</a>
+                
                 </div>
                 <?php
-                }
+                }elseif(isset($current_user)&&($current_user["role"]) == "admin"){
                 ?>
+                <div class="prispevek-uprava">
+                    <a href="deleteAd.php?id=<?php echo $current_id; ?>" class="prispevek-a">smazat</a>
+                </div>
+                <?php }?>
             </div>
         </div>
 
