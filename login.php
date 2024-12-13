@@ -84,7 +84,7 @@
                         }
                     }
                     if(isset($_GET["error"])){
-                        $message = $_GET["error"];
+                        $message = htmlspecialchars($_GET["error"]);
                         echo "<p class='php'>$message</p>";
                     }
                     
