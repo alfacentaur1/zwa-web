@@ -1,7 +1,9 @@
 <?php
     require "functions.php";
     require "header.php";
-    //TODO
+    if(!isset($_SESSION["username"])){
+        header("Location: login.php?error=Je nutné přihlášení.");
+    }
 
     $ads = loadAds();
     $data = [];

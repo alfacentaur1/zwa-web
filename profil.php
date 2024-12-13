@@ -10,7 +10,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hlavní stránka</title>
+    <title>Profil</title>
     <link rel="stylesheet" href="css/profil.css">
     <link rel="stylesheet" href="css/univerzal.css">
     <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
