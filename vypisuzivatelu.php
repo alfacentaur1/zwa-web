@@ -2,7 +2,8 @@
     require "functions.php";
     require "header.php";
     if(!isset($_SESSION["username"])||!isset($current_user) || $current_user["role"] != "admin"){
-        header("Location: login.php?error=K této stránce nemáte přístup.");
+        $message = "nemate_povoleni";
+        header("Location: login.php?error=$message");
     }
 
     if (isset($_POST["submit"]) && !empty($users)) {
