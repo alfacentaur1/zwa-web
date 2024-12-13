@@ -8,7 +8,7 @@
     $logged_in = false;
 
         //validate username
-        if(isset($_POST["submit"]) ){
+        
         if (!empty($username) && !empty($password)) {
             foreach($users as $user){
                 if ($user["username"] == $username) {
@@ -18,13 +18,11 @@
                         header("Location: index.php");
                         exit;
                     }
-                }
-            }
-        } else {
-            $logged_in = false; // nevyplneno
-        }
+            }}}
+    }else {
+        $logged_in = false; // not valid
     }
-}
+
 
 ?>
 <!DOCTYPE html>
@@ -81,7 +79,7 @@
                         }
                     }
                     if(isset($_GET["error"])){
-                        $message = htmlspecialchars($_GET["error"]);
+                        $message = urldecode(htmlspecialchars($_GET["error"]));
                         echo "<p class='php'>$message</p>";
                     }                
                 ?>

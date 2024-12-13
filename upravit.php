@@ -2,7 +2,8 @@
     require "functions.php";
     require "header.php";
     if(!isset($_SESSION["username"])){
-        header("Location: login.php?error=nutne_prihlaseni");
+        $message = urlencode("Je nutné přihlášení.");
+        header("Location: login.php?error=$message");
     }
     $ads = loadAds();
     $data = [];
