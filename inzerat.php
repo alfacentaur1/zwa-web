@@ -1,7 +1,6 @@
 <?php
 require "header.php";
 ?>
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -19,7 +18,7 @@ require "header.php";
 
 <?php
 if (isset($_GET["id"])) {
-    $current_id = $_GET["id"]; //id příspěvku
+    $current_id = $_GET["id"]; // id of ad
     $ad_user = null;
     $ads = loadAds();
 
@@ -40,8 +39,8 @@ if (isset($_GET["id"])) {
         $mena = htmlspecialchars($foundAd["mena"]);
         $rozmery = htmlspecialchars($foundAd["rozmery"]);
         $popis = htmlspecialchars($foundAd["popis"]);
-            //prohledam usery, ktery se bude shodovat s userid
-    
+
+    // get the ad user
     foreach($users as $user) {
         if($user["id"] == $foundAd["user_id"]){
             $ad_user = $user;
@@ -52,7 +51,7 @@ if (isset($_GET["id"])) {
 
         <div class="content-container">
             <div class="inzerat">
-                <img src="images/<?php echo $current_id; ?>" alt="obrazek-inzeratu">
+                <img src="<?php echo 'images/'.$current_id; ?>" alt="obrazek-inzeratu">
                 
                 <div class="text-container">
                     <p class="underline">Lokalita</p>
@@ -104,8 +103,8 @@ if (isset($_GET["id"])) {
                 <?php
                 if(isset($current_user) && isset($ad_user)&& (($current_user["id"] == $ad_user["id"]))){?>
                 <div class="prispevek-uprava">
-                    <a href="upravit.php?id=<?php echo $current_id; ?>" class="prispevek-a">upravit</a>
-                    <a href="deleteAd.php?id=<?php echo $current_id; ?>" class="prispevek-a">smazat</a>
+                    <a href="<?php echo 'upravit.php?id='.$current_id; ?>" class="prispevek-a">upravit</a>
+                    <a href="<?php echo 'deleteAd.php?id='.$current_id; ?>" class="prispevek-a">smazat</a>
                 
                 </div>
                 <?php

@@ -1,3 +1,4 @@
+<!-- template for nav -->
 <div class="nav">
         <nav>
             <h1>Rentco.</h1>

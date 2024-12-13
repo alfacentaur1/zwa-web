@@ -87,102 +87,97 @@
         
     ?>
 
-
-
-
-    <!DOCTYPE html>
-    <html lang="cs">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="css/addform.css">
-        <link rel="stylesheet" href="css/univerzal.css">
-        <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
-        <title>Přidat příspěvek</title>
-    </head>
-    <body>
-    <?php require "nav.php" ?>
-        <h2 >Přidání inzerátu</h2>
-        <?php 
-        foreach($errors as $error){
-            echo "<p class='php'>$error</p>";
-        }
-        
-        ?>
-        <div class="form-1">
-            <form action="" method="POST" enctype="multipart/form-data">
-                <fieldset>
-                    <div class="form">
-                        <!-- tady bude id usera ze session -->
-                        <input type="hidden" name ="user_id" value =<?php 
-                        if(isset($current_user)){
-                            echo $current_user["id"];
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/addform.css">
+    <link rel="stylesheet" href="css/univerzal.css">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+    <title>Přidat příspěvek</title>
+</head>
+<body>
+<?php require "nav.php" ?>
+    <h2 >Přidání inzerátu</h2>
+    <?php 
+    foreach($errors as $error){
+        echo "<p class='php'>$error</p>";
+    }
+    
+    ?>
+    <div class="form-1">
+        <form action="addform.php" method="POST" enctype="multipart/form-data">
+            <fieldset>
+                <div class="form">
+                    <input type="hidden" name ="user_id" value =<?php 
+                    if(isset($current_user)){
+                        echo $current_user["id"];
+                    }
+                    
+                    ?>>
+                    <input type="hidden" name="ad_id" value=<?php echo strval(uniqid())?>>
+                    <label for="lokalita">Lokalita</label>
+                    <input autocomplete = "off" type="text" name="lokalita" id="lokalita"
+                    <?php
+                        if(isset($_POST["lokalita"])){
+                            echo "value='" .htmlspecialchars($_POST["lokalita"])."'";
                         }
-                        
-                        ?>>
-                        <input type="hidden" name="ad_id" value=<?php echo strval(uniqid())?>>
-                        <label for="lokalita">Lokalita</label>
-                        <input autocomplete = "off" type="text" name="lokalita" id="lokalita"
+                    ?>>
+                </div>
+                <div class="form">
+                    <div class="form" id="select">
+                        <label for="cena">Cena</label>
+                        <input autocomplete = "off" type="text" name="cena" id="cena"
                         <?php
-                            if(isset($_POST["lokalita"])){
-                                echo "value='" .htmlspecialchars($_POST["lokalita"])."'";
-                            }
-                        ?>>
-                    </div>
-                    <div class="form">
-                        <div class="form" id="select">
-                            <label for="cena">Cena</label>
-                            <input autocomplete = "off" type="text" name="cena" id="cena"
-                            <?php
-                            if(isset($_POST["cena"])){
-                                echo "value='" .htmlspecialchars($_POST["cena"])."'";
-                            }
-                            ?>
-                            >
-                            <select name="mena" id="cena-input">
-                            <option value="czk" <?php echo (isset($_POST['mena']) && $_POST['mena'] === 'czk') ? 'selected' : ''; ?>>czk</option>
-                            <option value="eur" <?php echo (isset($_POST['mena']) && $_POST['mena'] === 'eur') ? 'selected' : ''; ?>>eur</option>
-                            </select>
-                        </div>
-                    <div class="form">
-                        <label for="rozmery">Rozměry(m2)</label>
-                        <input autocomplete = "off" type="text" name="rozmery" id="rozmery" 
-                        <?php
-                        if(isset($_POST["rozmery"])){
-                            echo "value='" .htmlspecialchars($_POST["rozmery"])."'";
+                        if(isset($_POST["cena"])){
+                            echo "value='" .htmlspecialchars($_POST["cena"])."'";
                         }
-                        ?> 
+                        ?>
                         >
+                        <select name="mena" id="cena-input">
+                        <option value="czk" <?php echo (isset($_POST['mena']) && $_POST['mena'] === 'czk') ? 'selected' : ''; ?>>czk</option>
+                        <option value="eur" <?php echo (isset($_POST['mena']) && $_POST['mena'] === 'eur') ? 'selected' : ''; ?>>eur</option>
+                        </select>
                     </div>
-                    <div class="form">
-                        <label for="popis" class="fieldset">Popis</label>
-                        <textarea name="popis" id="popis" cols="94" rows="15"><?php if(isset($_POST["popis"])){
-                            echo htmlspecialchars($_POST["popis"]);
-                        }else{
-                            echo "";    
-                        }
-                        ?></textarea>
-                    <div class="form" id="img">
-                        <label for="img-input">Foto</label>
-                        <input autocomplete = "off" type="file" name="img" id="img-input" accept="image/*">
-                    </div>
-                    </div>
-                    <div class="form">
-                        <label for="prodej">Chci</label>       
-                        <select name="prodej" id="prodej" class="prodej">
-                    <option value="pronajímat" <?php echo (isset($_POST["prodej"]) && ($_POST["prodej"] === "pronajímat" || $_POST["prodej"] === "pronajimat")) ? "selected" : ""; ?>>pronajímat</option>
-                    <option value="prodat" <?php echo (isset($_POST["prodej"]) && $_POST["prodej"] === "prodat") ? "selected" : ""; ?>>prodat</option>
-                </select>
-
-                    </div>
-                    <div class="form">
-                        <input type="submit" value="Přidat" class="submit" name="submit">
-                    </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
-    </body>
-    </html>
+                <div class="form">
+                    <label for="rozmery">Rozměry(m2)</label>
+                    <input autocomplete = "off" type="text" name="rozmery" id="rozmery" 
+                    <?php
+                    if(isset($_POST["rozmery"])){
+                        echo "value='" .htmlspecialchars($_POST["rozmery"])."'";
+                    }
+                    ?> 
+                    >
+                </div>
+                <div class="form">
+                    <label for="popis" class="fieldset">Popis</label>
+                    <textarea name="popis" id="popis" cols="94" rows="15"><?php if(isset($_POST["popis"])){
+                        echo htmlspecialchars($_POST["popis"]);
+                    }else{
+                        echo "";    
+                    }
+                    ?></textarea>
+                <div class="form" id="img">
+                    <label for="img-input">Foto</label>
+                    <input type="file" name="img" id="img-input" accept="image/*">
+                </div>
+                </div>
+                <div class="form">
+                    <label for="prodej">Chci</label>       
+                    <select name="prodej" id="prodej" class="prodej">
+                <option value="pronajímat" <?php echo (isset($_POST["prodej"]) && ($_POST["prodej"] === "pronajímat" || $_POST["prodej"] === "pronajimat")) ? "selected" : ""; ?>>pronajímat</option>
+                <option value="prodat" <?php echo (isset($_POST["prodej"]) && $_POST["prodej"] === "prodat") ? "selected" : ""; ?>>prodat</option>
+            </select>
+                </div>
+                <div class="form">
+                    <input type="submit" value="Přidat" class="submit" name="submit">
+                </div>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</body>
+</html>

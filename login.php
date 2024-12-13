@@ -7,7 +7,7 @@
     $users = loadUsers();
     $logged_in = false;
 
-        //validace username
+        //validate username
         if(isset($_POST["submit"]) ){
         if (!empty($username) && !empty($password)) {
             foreach($users as $user){
@@ -27,8 +27,6 @@
 }
 
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -47,8 +45,7 @@
                 <h1>Prodej.</h1>
                 <h1>Jednoduše.</h1>
                 <h1 class="rentco">Rentco.</h1>
-            </div>
-    
+            </div>    
         <form action="login.php" method="post">
             <fieldset class="fieldset-form">
                 <div class="form">
@@ -56,8 +53,8 @@
                     <h2>Vítejte</h2>
                 </div>
                 <div class="form">
-                    <label autocomplete = "off" for="username">Uživatelské jméno</label>
-                    <input type="text" name="username" id="username" 
+                    <label for="username">Uživatelské jméno</label>
+                    <input autocomplete = "off" type="text" name="username" id="username" 
                     
                     <?php
                         if(isset($username)){
@@ -86,14 +83,10 @@
                     if(isset($_GET["error"])){
                         $message = htmlspecialchars($_GET["error"]);
                         echo "<p class='php'>$message</p>";
-                    }
-                    
+                    }                
                 ?>
-    
             </fieldset>
         </form>
-        </div>
-        
-    
+        </div>    
     </body>
 </html>

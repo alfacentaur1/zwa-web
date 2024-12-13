@@ -11,11 +11,18 @@
         
         $users = loadUsers();
 
-        //validace username
-        $validated_username = validate_username($username); //"good" kdyz je to spravne, jinak "len"
-        $validated_password = validate_password($password); //"len" pri delce, "special" pri znaku jinak true
-        $validated_email = validate_email($email); // true kdyz je spravny
-        $are_passwords_same = are_passwords_same($password,$password_znovu); //true spravne, false spatne
+        //validate username
+        // "good" if the username is valid, otherwise "len" (too short)
+        $validated_username = validate_username($username); 
+
+        // "len" if the password is too short, "special" if it lacks required characters, otherwise true
+        $validated_password = validate_password($password); 
+
+        // true if the email is valid, false otherwise
+        $validated_email = validate_email($email); 
+
+        // true if the passwords match, false otherwise
+        $are_passwords_same = are_passwords_same($password, $password_znovu); 
 
         if(isAvalaible($email,$username) && $validated_email && $are_passwords_same && $validated_password
         &&$validated_username == "good"){
@@ -23,9 +30,7 @@
             addUser($email,$username,$hashed_password,$role);
             $_SESSION["username"] = $username;
             header("Location: index.php");
-            
         }
-        
     }
 ?>
 
@@ -113,12 +118,10 @@
                         }elseif(!$validated_email) {
                             echo "<p class='php'>Email je ve špatném formátu nebo zadaná doména neexistuje</p>";
                         }
-                    }
-
-                    
+                    }                 
                     if(isset($are_passwords_same)){
                         if($are_passwords_same === true) {
-                            //nic
+                            //nothing
                         }else {
                             echo "<p class='php'>Hesla se neshodují</p>"; 
                         }
@@ -136,7 +139,6 @@
                             }
                         }
                     }
-
                 ?>
             </fieldset>
         </form>

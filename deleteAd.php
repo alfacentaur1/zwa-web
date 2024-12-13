@@ -11,9 +11,9 @@ if(isset($_GET["id"])){
     }
     saveAd($rest);
     $image_id = $_GET["id"]; 
-    $image_path = './images/' . $image_id . '.jpg'; // Cesta k souboru
+    $image_path = './images/' . $image_id . '.jpg'; // path to file
 
-// Zkontrolujte, zda soubor existuje, a pokud ano, smažte ho
+// check if image exists, if yes, delete
 if (file_exists($image_path)) {
     unlink($image_path);
 } 

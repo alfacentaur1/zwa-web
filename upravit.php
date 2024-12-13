@@ -4,7 +4,6 @@
     if(!isset($_SESSION["username"])){
         header("Location: login.php?error=Je nutné přihlášení.");
     }
-
     $ads = loadAds();
     $data = [];
     $errors = [];
@@ -15,7 +14,6 @@
         }else {
             $my_id = null;
         }
-
         $data = [
             "id" => $ad_id,
             "lokalita" => $_POST["lokalita"],
@@ -25,7 +23,6 @@
             "popis" => trim($_POST["popis"]),
             "prodej" => $_POST["prodej"],
             // "user_id" => $_POST["user_id"]
-            
         ];
  
          $validate_all = validate_all($data);
@@ -33,7 +30,7 @@
     
         $errors = [];
 
-        //hledame errory
+        //search for errors
         if (isset($validate_all) && !validate_all($data)) {
             $errors[] = "Všechna pole musí být vyplněna.";
         }
@@ -54,16 +51,12 @@
                     saveAd($ads);
                     $redirect = $ad["id"];
                     header("Location: inzerat.php?id=$redirect");
-                    break; 
-                    
+                    break;                    
             }
         }if (!$found) {
             $errors[] = "Nenalezen inzerát s daným ID.";
         }
     }
-    
-
-   
 }
 if (isset($_GET["id"])) {
     $my_id = $_GET["id"];
@@ -82,11 +75,7 @@ if (isset($_GET["id"])) {
         }else{
             header("index.php?php=inzerat s daným id neexistuje");
         }
-
     ?>
-
-
-
 <!DOCTYPE html>
 <html lang="cs">
 <head>
@@ -104,19 +93,15 @@ if (isset($_GET["id"])) {
     <h2 >Upravení inzerátu</h2>
     <?php if(!isset($_GET["id"])){
         $errors[] = "nenalazen inzerát s daným id"; 
-    }
-    
-    
+    } 
     if(isset($errors)){
         foreach($errors as $error){
             echo "<p class='php'>$error</p>";
         }
 }
-    
-    
     ?>
     <div class="form-1">
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form action="upravit.php" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <div class="form">
                     <!-- <input type="hidden" name ="user_id" value ="12" > -->
