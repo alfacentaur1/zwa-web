@@ -30,7 +30,7 @@
             </div>
             <div>
                 <p class="underline">Email</p>
-                <p><?=htmlspecialchars($current_user["username"])?></p>
+                <p><?=htmlspecialchars($current_user["email"])?></p>
             </div>
             <div>
                 <p class="underline">Role</p>

@@ -102,10 +102,8 @@
                     if(isset($validated_password) && $validated_password !== true) {
                         if($validated_password == "len") {
                             echo "<p class='php'>Heslo musí mít minimálně 6 znaků</p>";
-                        }else{
-                            if($validated_password =="special") {
+                        }elseif ($validated_password =="special"){ 
                             echo "<p class='php'>Heslo musí mít min. 1 speciální znak a min. 1 velké písmeno</p>";
-                            }
                         }
                     }
                     if(isset($validated_email) && !$validated_email) {
@@ -113,7 +111,7 @@
                             echo "<p class='php'>Email už je obsazený</p>";
                         
                         }elseif(!$validated_email) {
-                            echo "<p class='php'>Email je ve špatném formátu</p>";
+                            echo "<p class='php'>Email je ve špatném formátu nebo zadaná doména neexistuje</p>";
                         }
                     }
 

@@ -59,6 +59,11 @@
     //validace emailu - validní - true, nevalidní - false
     function validate_email($email){
         if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $domain = substr(strrchr($email, "@"), 1);
+            // Kontrola existence domény pomocí DNS záznamů
+            if (!checkdnsrr($domain, "MX")) {
+                return false; // Doména neexistuje
+            }
             return true;  
         } else {
             return false; 
