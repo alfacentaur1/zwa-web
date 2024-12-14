@@ -80,7 +80,7 @@
         
                 // Pokračování s uložením inzerátu
                 addAd($data); // Uložení inzerátu
-                header("Location: index.php?php=uspesne pridano");
+                header("Location: inzerat.php?id=$ad_id");
                 exit();
             }
         }

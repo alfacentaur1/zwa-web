@@ -6,6 +6,7 @@
         header("Location: login.php?error=$message");
     }
     $ads = loadAds();
+    $foud = false;
     $data = [];
     $errors = [];
     if(isset($_POST["submit"])) {
@@ -52,7 +53,7 @@
                     saveAd($ads);
                     $redirect = $ad["id"];
                     header("Location: inzerat.php?id=$redirect");
-                    break;                    
+                    exit();           
             }
         }if (!$found) {
             $errors[] = "Nenalezen inzerát s daným ID.";
@@ -102,7 +103,7 @@ if (isset($_GET["id"])) {
 }
     ?>
     <div class="form-1">
-        <form action="upravit.php" method="POST" enctype="multipart/form-data">
+        <form action="#" method="POST" enctype="multipart/form-data">
             <fieldset>
                 <div class="form">
                     <!-- <input type="hidden" name ="user_id" value ="12" > -->

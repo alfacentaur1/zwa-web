@@ -23,13 +23,5 @@
                 }?>
                 
             </ul>
-            <?php 
-            if(isset($_SESSION["username"])){
-                $message = $current_user["username"];
-                echo "
-                <p id='user'>uživatel přihlášen jako: $message</p>
-                ";
-            }
-            ?>
         </nav>
 </div>

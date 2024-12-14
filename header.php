@@ -5,7 +5,6 @@
     $current_user = null;
     if(isset($_SESSION["username"])){
         $current_user = getUser($_SESSION["username"]);
-
 }
 
 ?>
