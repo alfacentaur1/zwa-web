@@ -1,6 +1,6 @@
 <?php
-    require "functions.php";
     session_start();
+    require "functions.php";
     if(isset($_POST["submit"])) {
         $username = $_POST["username"];
         $password = $_POST["password"];

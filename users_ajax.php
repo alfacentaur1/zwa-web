@@ -4,7 +4,6 @@
     // Načtěte uživatele z JSON souboru
     $users = loadUsers();
     
-
     // Vytvořte pole s uživatelskými jmény
     $users_arr = array();
     foreach($users as $user) {

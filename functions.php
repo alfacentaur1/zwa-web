@@ -1,4 +1,5 @@
 <?php 
+
     // validate username - must be min 6 characters long
     function validate_username($username) {
         if(strlen(trim($username)) < 6 ) {
@@ -225,6 +226,5 @@
             }
         }
     }
-
 
 ?>

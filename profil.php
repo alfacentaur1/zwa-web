@@ -3,6 +3,7 @@
     if(!isset($_SESSION["username"])){
         $message = urlencode("Je nutné přihlášení.");
         header("Location: login.php?error=$message");
+        exit;
     }
 ?>
 

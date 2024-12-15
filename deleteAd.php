@@ -1,4 +1,11 @@
 <?php
+session_start();
+if(!isset($_SESSION["username"])){
+    $message = urlencode("Nastala chyba.");
+    header("Location: login.php?error=$message");
+    exit;
+}
+
 require "functions.php";
 $ads = loadAds();
 if(isset($_GET["id"])){
@@ -17,7 +24,7 @@ if(isset($_GET["id"])){
 if (file_exists($image_path)) {
     unlink($image_path);
 } 
-    header("Location: index.php?php=uspesne smazano");
+    header("Location: index.php");
 }else{
     header("Location: index.php?php=id nenalezeno");
 }

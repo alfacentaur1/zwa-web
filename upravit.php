@@ -4,9 +4,10 @@
     if(!isset($_SESSION["username"])){
         $message = urlencode("Je nutné přihlášení.");
         header("Location: login.php?error=$message");
+        exit;
     }
     $ads = loadAds();
-    $foud = false;
+    $found = false;
     $data = [];
     $errors = [];
     if(isset($_POST["submit"])) {
@@ -64,6 +65,8 @@ if (isset($_GET["id"])) {
     $my_id = $_GET["id"];
     $found = false;
     foreach ($ads as &$ad) {
+        //validate user id
+        if($my_id == $ad["id"]){
             $lokalita = $ad["lokalita"];
             $cena = $ad["cena"];
             $mena = $ad["mena"];
@@ -71,10 +74,15 @@ if (isset($_GET["id"])) {
             $popis = $ad["popis"];
             $prodej = $ad["prodej"];
             $found = true;
-        }}
+            $user_id = $ad["user_id"];
+        }}}
         if(isset($found) && !$found) {
             $errors[] = "nenalazen inzerát s daným id";
-        }else{
+        }elseif ($user_id != $current_user["id"]) {
+            header("Location: index.php");
+            exit();
+        }
+        else{
             header("index.php?php=inzerat s daným id neexistuje");
         }
     ?>
