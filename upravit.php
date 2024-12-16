@@ -4,7 +4,7 @@
     if(!isset($_SESSION["username"])){
         $message = urlencode("Je nutné přihlášení.");
         header("Location: login.php?error=$message");
-        exit;
+        exit();
     }
     $ads = loadAds();
     $found = false;
@@ -57,7 +57,8 @@
                     exit();           
             }
         }if (!$found) {
-            $errors[] = "Nenalezen inzerát s daným ID.";
+            header("Location: index.php");
+            exit();
         }
     }
 }
@@ -75,16 +76,20 @@ if (isset($_GET["id"])) {
             $prodej = $ad["prodej"];
             $found = true;
             $user_id = $ad["user_id"];
-        }}}
+        }}
         if(isset($found) && !$found) {
-            $errors[] = "nenalazen inzerát s daným id";
+            header("Location: index.php");
+            exit();
         }elseif ($user_id != $current_user["id"]) {
             header("Location: index.php");
             exit();
         }
-        else{
-            header("index.php?php=inzerat s daným id neexistuje");
+        } else {
+            header("Location: index.php");
+            exit();
         }
+            
+
     ?>
 <!DOCTYPE html>
 <html lang="cs">
@@ -100,9 +105,8 @@ if (isset($_GET["id"])) {
 </head>
 <body>
 <?php require "nav.php" ?>
-    <h2 >Upravení inzerátu</h2>
-    <?php if(!isset($_GET["id"])){
-        $errors[] = "nenalazen inzerát s daným id"; 
+<?php if(!isset($_GET["id"])){
+            header("Location: index.php");
     } 
     if(isset($errors)){
         foreach($errors as $error){
@@ -110,6 +114,7 @@ if (isset($_GET["id"])) {
         }
 }
     ?>
+    <h2 >Upravení inzerátu</h2>
     <div class="form-1">
         <form action="#" method="POST" enctype="multipart/form-data">
             <fieldset>
