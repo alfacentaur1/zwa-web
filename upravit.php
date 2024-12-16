@@ -105,16 +105,15 @@ if (isset($_GET["id"])) {
 </head>
 <body>
 <?php require "nav.php" ?>
-<?php if(!isset($_GET["id"])){
-            header("Location: index.php");
-    } 
+<h2 >Upravení inzerátu</h2>
+<?php 
     if(isset($errors)){
         foreach($errors as $error){
+            $error = htmlspecialchars($error);
             echo "<p class='php'>$error</p>";
         }
 }
     ?>
-    <h2 >Upravení inzerátu</h2>
     <div class="form-1">
         <form action="#" method="POST" enctype="multipart/form-data">
             <fieldset>
