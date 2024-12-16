@@ -2,7 +2,7 @@
     // just destroy current session
     session_start();
     if(!isset($_SESSION["username"])){
-        $message = urlencode("Nemáte práva.");
+        $message = urlencode("Nutné přihlášení.");
         header("Location: login.php?error=$message");
         exit;
     }

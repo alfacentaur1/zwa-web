@@ -2,3 +2,23 @@
   Order allow,deny
   Deny from all
 </Files>
+<Files "users_ajax.php">
+  Order Allow,Deny
+  Deny from all
+</Files>
+<Files "functions.php">
+  Order Allow,Deny
+  Deny from all
+</Files>
+<Files "nav.php">
+  Order Allow,Deny
+  Deny from all
+</Files>
+<Files "header.php">
+  Order Allow,Deny
+  Deny from all
+</Files>
+<Files "*.js">
+  Order Allow,Deny
+  Deny from all
+</Files>
