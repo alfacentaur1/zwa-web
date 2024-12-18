@@ -1,4 +1,13 @@
 <?php
+/**
+ * Job: Log users in.
+ * The user fills in the form fields. Upon submission, the input is 
+ * validated again. If something is wrong (invalid input), the user is 
+ * redirected back to the form with the previously filled-in data (using the
+ *  POST superglobal) and an error message. If the data is valid, the user 
+ * is redirected to index.php and a SESSION variable is set with the 
+ * username under the key "username."
+ */
     session_start();
     require "functions.php";
     if(isset($_POST["submit"])) {
@@ -7,26 +16,27 @@
     $users = loadUsers();
     $logged_in = false;
 
-        //validate username
-        
+        // Validate username and password (e.g., minimum length, non-empty)
         if (!empty($username) && !empty($password)) {
             foreach($users as $user){
                 if ($user["username"] == $username) {
                     if (password_verify($password,$user["password"])){
                         $logged_in = true;
+                        // Validation passed, store username in session
                         $_SESSION["username"] = $username;
+                        // Redirect to index.php after successful login(PRG)
                         header("Location: index.php");
                         exit;
                     }
             }}}
     }else {
-        $logged_in = false; // not valid
+        $logged_in = false; // Not valid
     }
 
 
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cs">
     <head>
         <title>Log in</title>
         <meta charset="UTF-8">

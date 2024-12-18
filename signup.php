@@ -1,4 +1,16 @@
 <?php
+/**
+ * Job: Register new user.
+ * The user enters unique data into form fields, except for the password.
+ *  When the form is submitted, all fields are validated. If there is an error, the form returns pre-filled and informs the user about what is 
+ * wrong. Pre-filling is done via the POST global variable, with the form 
+ * submitting itself. If the data is correctly filled out, the user is added
+ *  to users.json with a hashed password, a unique ID (sent via a hidden 
+ * form field), and all the provided information. The SESSION global 
+ * variable is also set with the key "username." Afterward, the user is 
+ * redirected to index.php. Username availability and password validation 
+ * are handled using JavaScript.
+ */
     session_start();
     require "functions.php";
 

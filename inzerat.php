@@ -1,4 +1,27 @@
 <?php
+/**
+ * Job: Display ad details.
+ * The user can access this page by clicking on an ad on the index.php page.
+ *  The ad is displayed based on the ID, which is retrieved from the GET 
+ * superglobal variable. The code uses this ID to search for the 
+ * corresponding ad object in the JSON file. The details of the ad are then 
+ * displayed.
+ * If the user is an admin, they have the option to delete the ad. If the 
+ * user is the one who posted the ad, they have the option to edit it. If 
+ * the user is neither the admin nor the one who posted the ad, no options 
+ * forediting or deleting are displayed.
+ * This is determined using the SESSION superglobal variable. First, the 
+ * user object is retrieved from the users.json file using the "username" 
+ * key. From there, we access the role and ID of the user. If the user's ID
+ *  matches the ID of the user who posted the ad, the appropriate options 
+ * (delete or edit) are displayed. The same logic is applied for the admin 
+ * role.
+ * If the user clicks on "Delete," they are redirected to deleteAd.php with 
+ * the ad's ID in the URL.
+ * If the user clicks on "Edit," they are redirected to edit.php with the 
+ * ad's ID in the URL.
+
+ */
 require "header.php";
 ?>
 <!DOCTYPE html>
@@ -18,21 +41,23 @@ require "header.php";
 
 <?php
 if (isset($_GET["id"])) {
-    $current_id = $_GET["id"]; // id of ad
-    $ad_user = null;
-    $ads = loadAds();
+    $current_id = $_GET["id"]; // Store the ad ID from the URL
+    $ad_user = null; 
+    $ads = loadAds(); // Load all ads from the JSON file
 
-    // Searching ads
-    $foundAd = false;
+    // Searching for the ad by ID
+    $foundAd = false; 
     foreach ($ads as $ad) {
+        // Check if the current ad's ID matches the provided ID
         if (isset($ad["id"]) && $ad["id"] == $current_id) {
-            $foundAd = $ad;
-            break;
+            $foundAd = $ad; // Store the found ad in the variable
+            break; 
         }
     }
 
-
+    // If the ad was found, process its details
     if ($foundAd) {
+        // Sanitize ad fields to prevent XSS
         $prodej = htmlspecialchars($foundAd["prodej"]);
         $lokalita = htmlspecialchars($foundAd["lokalita"]);
         $cena = htmlspecialchars($foundAd["cena"]);
@@ -40,13 +65,14 @@ if (isset($_GET["id"])) {
         $rozmery = htmlspecialchars($foundAd["rozmery"]);
         $popis = htmlspecialchars($foundAd["popis"]);
 
-    // get the ad user
-    foreach($users as $user) {
-        if($user["id"] == $foundAd["user_id"]){
-            $ad_user = $user;
-            break;
+        // Find the user who posted the ad
+        foreach ($users as $user) {
+            // Match the user ID with the ad's user ID
+            if ($user["id"] == $foundAd["user_id"]) {
+                $ad_user = $user; 
+                break; 
+            }
         }
-    }
         ?>
 
         <div class="content-container">

@@ -1,131 +1,175 @@
-<?php 
+<?php
+    /**
+     * Job: Have the majority of used functions in one file.
+     */
 
-    // validate username - must be min 6 characters long
+    /**
+     * Validate username - must be at least 6 characters long.
+     * 
+     * @param string $username The username to validate.
+     * @return string Returns "len" if the username is too short, otherwise "good".
+     */
     function validate_username($username) {
-        if(strlen(trim($username)) < 6 ) {
-            return "len"; // return len if too short
+        if (strlen(trim($username)) < 6) {
+            return "len";
+        } else {
+            return "good";
         }
-        else {return "good";}// return good if the username is valid
     }
 
-    // password validation
-
+    /**
+     * Validate password based on length, uppercase, and special characters.
+     * 
+     * @param string $password The password to validate.
+     * @return string|bool Returns "len" if the password is too short, 
+     *                     "special" if it lacks uppercase or special characters, 
+     *                     or true if valid.
+     */
     function validate_password($password) {
-
-        $has_no_big = true; // flag for absence of uppercase
-        $has_no_special = true;// flag for absence of special chars
+        $has_no_big = true;
+        $has_no_special = true;
 
         $big_letters = range('A', 'Z');
         $special_characters = ['!', '"', '#', '$', '%', '&', "'", '(', ')', '*', '+', ',', '-', '.', '/', ':', ';', '<', '=', '>', '?', '@', '[', '\\', ']', '^', '_', '{', '|', '}', '~'];
+        $splitted_password = str_split($password);
 
-        $splitted_password = str_split($password); // split into individual characters
-
-
-        // check if the password has min 6 length
-        if(strlen($password) < 6) {
+        if (strlen($password) < 6) {
             return "len";
-        } 
-        // loop in password for special and big letters
-        foreach($splitted_password as $char) {
-            if(in_array($char, $big_letters)) {
-                $has_no_big = false; // password contains big letter
+        }
+
+        foreach ($splitted_password as $char) {
+            if (in_array($char, $big_letters)) {
+                $has_no_big = false;
             }
-            if(in_array($char, $special_characters)) {
-                $has_no_special = false; // password contains special character
+            if (in_array($char, $special_characters)) {
+                $has_no_special = false;
             }
         }
 
-        // no special or big characters
         if ($has_no_big || $has_no_special) {
             return "special";
         }
 
-        return true; // password is valid
-        
+        return true;
     }
 
-    // check if 2 passwords are same
+    /**
+     * Check if two passwords are identical.
+     * 
+     * @param string $p1 The first password.
+     * @param string $p2 The second password.
+     * @return bool Returns true if passwords match, false otherwise.
+     */
     function are_passwords_same($p1, $p2) {
-        if($p1===$p2) {
-            return true; // they match
-        }else {
-            return false; // no match
-        }
+        return $p1 === $p2;
     }
 
-    //email validation
-    function validate_email($email){
-        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {  // check if email format is valid
-            $domain = substr(strrchr($email, "@"), 1); // extract domain part
-            // check if the domain has MX records
+    /**
+     * Validate email address format and domain.
+     * 
+     * @param string $email The email address to validate.
+     * @return bool Returns true if valid, false otherwise.
+     */
+    function validate_email($email) {
+        if (filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $domain = substr(strrchr($email, "@"), 1);
             if (!checkdnsrr($domain, "MX")) {
-                return false; // Domain does not exist
-            }
-            return true;  // valid email
-        } else {
-            return false; // not valid email
-        }
-    }
-    
-    // validate all fields in form
-    function validate_all($data) {
-        foreach ($data as $key => $bit) {
-            // check if any field, except "img" is empty or not set
-            if($key !== 'img' && (!isset($bit) || empty(trim($bit)))){
                 return false;
             }
-        }return true; // all fields are valid
-    }
-
-    // validate the upload photo format
-    function is_right_format($photo) {
-        if(($photo["type"] == "image/png"
-        || $photo["type"] == "image/jpeg" )){
-            return true; // photo is in correct format
+            return true;
         } else {
-        return false; // photo format is invalid
+            return false;
         }
     }
 
-    // validate price and size inputs
-    function price_size_check($price, $size) {
-        // remove spaces and trim inputs
-        $price = trim(str_replace(" ", "", $price));
-        $size = trim(str_replace(" ", "", $size));
-    
-        // check if both are numeric and greater than 0
-        if (is_numeric($price) && $price > 0 && is_numeric($size) && $size > 0) {
-            return true; // both valid
-        } else {
-            return false; // invalid price or size or both
-        }
-    }
-    // save data to json file
-    function addToJson($json,$data) {
-        file_put_contents($json,json_encode($data));
-    }
-    // load users from json file
-    function loadUsers() {
-        $users = file_get_contents("users.json");
-        if (!$users) return []; // if no users, return []
-        return json_decode($users, true); // if users exist, decode json into array
-    }
-
-    // check if email or username is avalaible
-    function isAvalaible($email,$username) {
-        $users = loadUsers();
-        foreach ($users as $user) {
-            if (($user["email"] == $email) || $user["username"] == $username){
-                return false; // email or username is taken
+    /**
+     * Validate all form fields except "img".
+     * 
+     * @param array $data An associative array of form fields.
+     * @return bool Returns true if all fields are valid, false otherwise.
+     */
+    function validate_all($data) {
+        foreach ($data as $key => $bit) {
+            if ($key !== 'img' && (!isset($bit) || empty(trim($bit)))) {
+                return false;
             }
         }
-        return true; // email and username are avalaible
+        return true;
     }
 
-    // add new user to json
-    function addUser($email,$username,$password,$role) {
-        $users = loadUsers();
+    /**
+     * Check if the uploaded photo has the correct format.
+     * 
+     * @param array $photo The photo file data.
+     * @return bool Returns true if format is valid, false otherwise.
+     */
+    function is_right_format($photo) {
+        return $photo["type"] === "image/png" || $photo["type"] === "image/jpeg";
+    }
 
+    /**
+     * Validate price and size inputs.
+     * 
+     * @param mixed $price The price input.
+     * @param mixed $size The size input.
+     * @return bool Returns true if both are numeric and greater than 0, false otherwise.
+     */
+    function price_size_check($price, $size) {
+        $price = trim(str_replace(" ", "", $price));
+        $size = trim(str_replace(" ", "", $size));
+
+        return is_numeric($price) && $price > 0 && is_numeric($size) && $size > 0;
+    }
+
+    /**
+     * Save data to a JSON file.
+     * 
+     * @param string $json The JSON file path.
+     * @param array $data The data to save.
+     * @return void
+     */
+    function addToJson($json, $data) {
+        file_put_contents($json, json_encode($data));
+    }
+
+    /**
+     * Load users from a JSON file.
+     * 
+     * @return array Returns an array of users, or an empty array if no users exist.
+     */
+    function loadUsers() {
+        $users = file_get_contents("users.json");
+        return $users ? json_decode($users, true) : [];
+    }
+
+    /**
+     * Check if email or username is available.
+     * 
+     * @param string $email The email to check.
+     * @param string $username The username to check.
+     * @return bool Returns true if both are available, false otherwise.
+     */
+    function isAvalaible($email, $username) {
+        $users = loadUsers();
+        foreach ($users as $user) {
+            if ($user["email"] === $email || $user["username"] === $username) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Add a new user to the JSON file.
+     * 
+     * @param string $email The user's email.
+     * @param string $username The user's username.
+     * @param string $password The user's password.
+     * @param string $role The user's role.
+     * @return void
+     */
+    function addUser($email, $username, $password, $role) {
+        $users = loadUsers();
         $users[] = [
             "id" => uniqid(),
             "email" => $email,
@@ -134,97 +178,150 @@
             "role" => $role
         ];
         addToJson("users.json", $users);
-        
     }
-    // check if email is unique
-    function validEmail($email,$users) {
+
+        /**
+     * Check if email is unique.
+     * 
+     * @param string $email The email to validate.
+     * @param array $users The list of users to check against.
+     * @return bool Returns true if the email is unique, false otherwise.
+     */
+    function validEmail($email, $users) {
         foreach ($users as $user) {
-            if (($user["email"] == $email)){
+            if (($user["email"] == $email)) {
                 return false; // email is taken
             }
         }
         return true; // email is unique
     }
 
-    // validate if username is unique
-    function validUsername($username,$users) {
+    /**
+     * Validate if username is unique.
+     * 
+     * @param string $username The username to validate.
+     * @param array $users The list of users to check against.
+     * @return bool Returns true if the username is unique, false otherwise.
+     */
+    function validUsername($username, $users) {
         foreach ($users as $user) {
-            if (($user["username"] == $username)){
+            if (($user["username"] == $username)) {
                 return false; // username exists
             }
         }
         return true; // username is unique
     }
 
-    // authenticate user by username and password
-    function userLogin($username,$password,$users) {
+    /**
+     * Authenticate a user by username and password.
+     * 
+     * @param string $username The username to authenticate.
+     * @param string $password The password to authenticate.
+     * @param array $users The list of users to check against.
+     * @return bool Returns true if the user is authenticated, false otherwise.
+     */
+    function userLogin($username, $password, $users) {
         foreach ($users as $user) {
-            if($user["password"] == $password && $user["username"] == $username) {
+            if ($user["password"] == $password && $user["username"] == $username) {
                 return true; // user authenticated
             }
-
         }
         return false; // authentication failed
     }
 
-    // load ads from json
+    /**
+     * Load ads from the JSON file.
+     * 
+     * @return array Returns an array of ads or an empty array if the file is not found.
+     */
     function loadAds() {
         $ads = file_get_contents("inzeraty.json");
         if (!$ads) return []; // return empty array if file is not found
         return json_decode($ads, true); // decode json into array
     }
 
-    // add a new ad into json
+    /**
+     * Add a new ad to the JSON file.
+     * 
+     * @param array $data The ad data to add.
+     * @return void
+     */
     function addAd($data) {
         $ads = loadAds();
         $ads[] = $data;
-        addToJson("inzeraty.json",$ads);
+        addToJson("inzeraty.json", $ads);
     }
 
-    // update the ads json
+    /**
+     * Update the ads JSON file.
+     * 
+     * @param array $file The updated data to save.
+     * @return void
+     */
     function updateDB($file) {
         $json = json_encode($file);
-
-        $result = file_put_contents("inzeraty.json",$json); //save updated data into json
-
+        $result = file_put_contents("inzeraty.json", $json); // save updated data into json
     }
 
-    // save user roles into json
+    /**
+     * Save user roles into the users JSON file.
+     * 
+     * @param array $file The updated user roles data.
+     * @return void
+     */
     function saveRoles($file) {
         $json = json_encode($file);
-
-        $result = file_put_contents("users.json",$json); // save it into json
-
+        $result = file_put_contents("users.json", $json); // save it into json
     }
 
-    // save a single ad into json
-    function saveAd($ad){
-        $str = json_encode( $ad);
+    /**
+     * Save a single ad to the JSON file.
+     * 
+     * @param array $ad The ad data to save.
+     * @return void
+     */
+    function saveAd($ad) {
+        $str = json_encode($ad);
         file_put_contents("inzeraty.json", $str);
-      }
+    }
 
-    // get the count of items in json
-    function getCount($db){
+    /**
+     * Get the count of items in a database (array).
+     * 
+     * @param array $db The database to count items from.
+     * @return int Returns the number of items in the database.
+     */
+    function getCount($db) {
         return count($db);
     }
 
-    // list ads with limit and offset, if not passed give it default values
-    function listAds($db,$limit = null, $offset = 0) {
+    /**
+     * List ads with a limit and offset.
+     * 
+     * @param array $db The database of ads.
+     * @param int|null $limit The maximum number of ads to return (optional).
+     * @param int $offset The starting point for listing ads (default is 0).
+     * @return array Returns a subset of ads based on the limit and offset.
+     */
+    function listAds($db, $limit = null, $offset = 0) {
         if ($limit === null) {
             return array_slice($db, $offset); // return all items from the offset
         }
         return array_slice($db, $offset, $limit); // return a limited number of items
     }
 
-    // get user by username
-    function getUser($username){
+    /**
+     * Get a user by their username.
+     * 
+     * @param string $username The username to search for.
+     * @return array|null Returns the user data if found, or null if not found.
+     */
+    function getUser($username) {
         $users = loadUsers();
-
-        foreach($users as $user){
-            if ($user["username"] == $username){
-                return $user; //if found return user
+        foreach ($users as $user) {
+            if ($user["username"] == $username) {
+                return $user; // if found, return user
             }
         }
     }
-
 ?>

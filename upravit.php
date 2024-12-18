@@ -1,15 +1,31 @@
 <?php
+/**
+ * Job: Update ad in json database.
+ * This page can be accessed through a link in the ad details. The user must
+ *  be logged in and must be the owner of the ad to be able to edit it. This
+ *  is checked using the SESSION global variable. The ad's ID is then 
+ * retrieved from the GET variable, which is used to identify the ad in 
+ * inzeraty.json. If the ad doesn't exist, the user is redirected to the 
+ * index page. If the ad exists, the form is pre-filled with the ad's data. 
+ * Upon submission, the data is validated, and if there are errors, the user 
+ * is notified. If everything is valid, the JSON file is updated, and the 
+ * user is redirected to the updated ad page.
+ */
     require "functions.php";
     require "header.php";
+    // If not logged in, show an error message and redirect to login page
     if(!isset($_SESSION["username"])){
         $message = urlencode("Je nutné přihlášení.");
         header("Location: login.php?error=$message");
         exit();
     }
+    // Load all ads from the JSON file
+    // Flag to track if the ad is found
     $ads = loadAds();
     $found = false;
     $data = [];
     $errors = [];
+    // If the form is submitted
     if(isset($_POST["submit"])) {
         $ad_id = $_POST["ad_id"];
         if(isset($_GET["id"])){
@@ -17,6 +33,7 @@
         }else {
             $my_id = null;
         }
+        // Store form data in the $data array
         $data = [
             "id" => $ad_id,
             "lokalita" => $_POST["lokalita"],
@@ -27,21 +44,23 @@
             "prodej" => $_POST["prodej"],
             // "user_id" => $_POST["user_id"]
         ];
- 
+        // Validate all form fields
          $validate_all = validate_all($data);
          $is_price_size_right_format = price_size_check($_POST["cena"],$_POST["rozmery"]);
     
         $errors = [];
 
-        //search for errors
+        // Search for errors
         if (isset($validate_all) && !validate_all($data)) {
             $errors[] = "Všechna pole musí být vyplněna.";
         }
         if (isset($is_price_size_right_format) && !price_size_check($_POST["cena"], $_POST["rozmery"])) {
             $errors[] = "Cena a rozměry musí být čísla větší než 0.";
         }
+        // If no errors, proceed to update the ad
         if(empty($errors)) {
             $found = false;
+            // Loop through all ads to find the one with the matching ID
             foreach ($ads as &$ad) {
                 if ($ad["id"] == $my_id) {
                     $ad["lokalita"] = trim($_POST["lokalita"]);
@@ -52,11 +71,13 @@
                     $ad["prodej"] = $_POST["prodej"];
                     $found = true;
                     saveAd($ads);
+                    // Redirect to the updated ad page
                     $redirect = $ad["id"];
                     header("Location: inzerat.php?id=$redirect");
                     exit();           
             }
         }if (!$found) {
+            // If ad is not found, redirect to index page
             header("Location: index.php");
             exit();
         }

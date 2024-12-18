@@ -1,4 +1,17 @@
 <?php
+/**
+ * Job: Display ads from a JSON file
+ * The page displays all ads from inzeraty.json, each as a link to a more 
+ * detailed ad. The anchor element sets the target URL to inzerat.php?id= 
+ * followed by the ad's ID. All ads are sorted in ascending order by 
+ * dimensions. They are rendered using a foreach loop, iterating over the 
+ * associative array from the JSON file.
+ * Pagination is implemented by setting a limit for the number of ads per 
+ * page. The URL is updated to reflect the current page. To determine the 
+ *  ads to display on the current page, the offset is calculated based on
+ *  the current page (e.g., for page 3, the offset is (3 - 1) * limit). The 
+ * ads are then fetched starting from this offset for the current page.
+ */
         require "header.php";
         $ads = loadAds();
         if ($ads){
@@ -27,8 +40,10 @@
     // set the limit (ads for page) and actual page
     $limit = filter_input(INPUT_GET, 'limit', FILTER_VALIDATE_INT, ["options" => ["default" => 4, "min_range" => 1]]);
     $page = filter_input(INPUT_GET, 'page', FILTER_VALIDATE_INT, ["options" => ["default" => 1, "min_range" => 1, "max_range" => ceil(getCount($ads)/$limit)]]);
+    //set the offset
     $offset = ($page - 1) * $limit;
     $ads_limit = listAds($ads,$limit, $offset);
+    //if there is some message in url, display it
     if (isset($_GET["php"])){
         $message = htmlspecialchars($_GET["php"]);
         echo "<div class='phpdiv'></div><p class='php'>$message</p></div>";
@@ -40,6 +55,7 @@
     </div>
     <div class="main">  
     <?php 
+    //if ads do exist, loop them and generate ad for each json object
     if($ads){
         foreach ($ads_limit as $ad): ?>
             <?php 

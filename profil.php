@@ -1,5 +1,13 @@
 <?php
+/**
+ * Job: Show details about users profile. (users current session)
+ * The user can only access the page if they are logged in. Once logged in,
+ *  the user is found in the users.json file using the username key from the 
+ * global $_SESSION variable, and the user details (username, email, role) 
+ * are displayed from the JSON file.
+ */
     require "header.php";
+    // If there is no users session, redirect him to login
     if(!isset($_SESSION["username"])){
         $message = urlencode("Je nutné přihlášení.");
         header("Location: login.php?error=$message");

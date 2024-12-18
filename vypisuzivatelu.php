@@ -1,23 +1,37 @@
 <?php
+/**
+ * Job: Role management for admins.
+ * If the user is not logged in or is not an admin, they will be redirected
+ *  to the login page. If the user is an admin, a list of users will be 
+ * displayed using a foreach loop that processes users.json. For each user,
+ *  a select dropdown will show their current role. If the admin wants to 
+ * change the role, they can simply select a new role and submit the form. 
+ * The selected role will then be updated in users.json via the POST data, 
+ * and the page will redirect to index.php.
+ */
     require "functions.php";
     require "header.php";
-    if(!isset($_SESSION["username"])||!isset($current_user) || $current_user["role"] != "admin"){
-            $message = urlencode("Nemáte práva.");
-            header("Location: login.php?error=$message");
+    // Check if the user is logged in and has admin rights
+    if (!isset($_SESSION["username"]) || !isset($current_user) || $current_user["role"] != "admin") {
+        $message = urlencode("Nemáte práva.");  
+        header("Location: login.php?error=$message");  
+        exit;  
     }
 
+    // If the form is submitted and there are users to process
     if (isset($_POST["submit"]) && !empty($users)) {
+        // Loop through each user to update their role
         foreach ($users as &$user) {
-            $username = $user["username"];
-            if (isset($_POST[$username])) { // Kontrola, zda klíč existuje
-                $user["role"] = $_POST[$username]; // Aktualizace role
+            $username = $user["username"];  
+            if (isset($_POST[$username])) {  
+                $user["role"] = $_POST[$username];  // Update users role
             }
         }
-        saveRoles($users);
-        $users = loadUsers();
-        header("Location: index.php?php=uspesne zmeneno");
-        // Uložení aktualizovaných uživatelů
-    }
+    saveRoles($users);  // Save the updated users data with the new roles
+    $users = loadUsers();  // Reload the users from the JSON file
+    header("Location: index.php?php=uspesne zmeneno");  
+    exit;  
+}
 
 ?>
 

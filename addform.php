@@ -1,4 +1,17 @@
 <?php
+/**
+ *Job: Add advertisements into json database.
+ * The user must be logged in; otherwise, they are redirected to the login 
+ * page. The user submits data, which is validated. If anything is wrong, 
+ * the user is alerted, and the form is returned with the previously entered
+ *  data using the POST superglobal variable. If everything is valid, the 
+ * data is saved to inzeraty.json. Each advertisement has a unique ID, and 
+ * the user's ID (who added the ad) is stored via a hidden form field. The 
+ * image is saved after being reformatted to prevent unnecessary loading 
+ * times. Finally, the user is redirected to index.php.
+
+ */
+// If user is not logged in, redirect him
     require "header.php";
     if(!isset($_SESSION["username"])){
         $message = urlencode("Je nutné přihlášení.");
@@ -7,8 +20,8 @@
     }
 
 
-    $errors = []; // Pole pro ukládání chyb
-
+    $errors = []; // array for saving errors
+    //if form is submitted, create data array
     if (isset($_POST["submit"])) {
         $ad_id = $_POST["ad_id"];
         $data = [
@@ -25,67 +38,73 @@
         ];
         $validate_all = validate_all($data);
         $is_price_size_right_format = price_size_check($_POST["cena"],$_POST["rozmery"]);
-        // Validace polí
+        // array validation
         if (isset($validate_all) && !$validate_all) {
             $errors[] = "Všechna pole musí být vyplněna.";
         }
 
-        // Validace ceny a rozměrů
+        // size and price validation
         if (!price_size_check($_POST["cena"], $_POST["rozmery"])) {
             $errors[] = "Cena a rozměry musí být čísla větší než 0.";
         }
 
-        // Validace obrázku
-        if (!isset($_FILES['img']) || $_FILES['img']['error'] !== UPLOAD_ERR_OK) {
-            $errors[] = "Musíte nahrát obrázek.";
-        } elseif (!is_right_format($_FILES['img'])) {
-            $errors[] = "Obrázek musí být ve formátu JPEG nebo PNG.";
-        }
+        // Validate image format
+if (!isset($_FILES['img']) || $_FILES['img']['error'] !== UPLOAD_ERR_OK) {
+    // If image is not uploaded or there is an error, add error message
+    $errors[] = "Musíte nahrát obrázek."; // You must upload an image.
+} elseif (!is_right_format($_FILES['img'])) {
+    // If the image is not in JPEG or PNG format, add error message
+    $errors[] = "Obrázek musí být ve formátu JPEG nebo PNG."; // The image must be in JPEG or PNG format.
+}
 
-        // Pokud nejsou chyby, pokračujeme
-        if (empty($errors)) {
-            $new_width = 300;
-            $new_height = 200;
-            $uploadFilePath = "./images/" . $ad_id . ".jpg"; // Uložení jako JPG
-        
-            // Zpracování obrázku
-            $uploaded_img = $_FILES['img']['tmp_name'];
-            list($width, $height, $type) = getimagesize($uploaded_img);
-        
-            switch ($type) {
-                case IMAGETYPE_JPEG:
-                    $srcImage = imagecreatefromjpeg($uploaded_img);
-                    break;
-                case IMAGETYPE_PNG:
-                    $srcImage = imagecreatefrompng($uploaded_img);
-                    break;
-                case IMAGETYPE_GIF:
-                    $srcImage = imagecreatefromgif($uploaded_img);
-                    break;
-                default:
-                    $errors[] = "Neplatný formát obrázku.";
-                    break;
-            }
-        
-            // Pokud je formát platný, změňte velikost
-            if (empty($errors)) {
-                $newImage = imagecreatetruecolor($new_width, $new_height);
-                imagecopyresampled($newImage, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
-        
-                // Uložení nového obrázku
-                imagejpeg($newImage, $uploadFilePath, 90);
-        
-                // Uvolnění paměti
-                imagedestroy($srcImage);
-                imagedestroy($newImage);
-        
-                // Pokračování s uložením inzerátu
-                addAd($data); // Uložení inzerátu
-                header("Location: inzerat.php?id=$ad_id");
-                exit();
-            }
-        }
+// Proceed if there are no errors
+if (empty($errors)) {
+    $new_width = 300; // Desired width for the resized image
+    $new_height = 200; // Desired height for the resized image
+    $uploadFilePath = "./images/" . $ad_id . ".jpg"; // Save image as JPG with ad ID as filename
+    
+    // Get the temporary image file and its dimensions
+    $uploaded_img = $_FILES['img']['tmp_name'];
+    list($width, $height, $type) = getimagesize($uploaded_img); // Get original image dimensions and type
+    
+    // Process image based on its type (JPEG or PNG)
+    switch ($type) {
+        case IMAGETYPE_JPEG:
+
+            $srcImage = imagecreatefromjpeg($uploaded_img);
+            break;
+        case IMAGETYPE_PNG:
+
+            $srcImage = imagecreatefrompng($uploaded_img);
+            break;
+        default:
+            // If the image format is invalid, add error message
+            $errors[] = "Neplatný formát obrázku."; // Invalid image format.
+            break;
     }
+
+    // If no errors and the image format is valid, resize the image
+    if (empty($errors)) {
+        // Create a new true-color image with desired dimensions
+        $newImage = imagecreatetruecolor($new_width, $new_height);
+        
+        // Copy and resize the uploaded image into the new image resource
+        imagecopyresampled($newImage, $srcImage, 0, 0, 0, 0, $new_width, $new_height, $width, $height);
+        
+        // Save the resized image as JPEG
+        imagejpeg($newImage, $uploadFilePath, 90); // Save with 90% quality
+        
+        // Free up memory by destroying the image resources
+        imagedestroy($srcImage);
+        imagedestroy($newImage);
+        
+        addAd($data); // Save the advertisement data
+        
+        // Redirect to the ad page
+        header("Location: inzerat.php?id=$ad_id");
+        exit();
+    }
+} }
         
     ?>
 

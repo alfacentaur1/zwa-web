@@ -1,11 +1,15 @@
 <?php
-    // just destroy current session
+/**
+ * Job: Logout current user, destroy his session.
+ */
+    // If user is not logged in, redirect him into login, with message.
     session_start();
     if(!isset($_SESSION["username"])){
         $message = urlencode("Nutné přihlášení.");
         header("Location: login.php?error=$message");
         exit;
     }
+    // Destroy session
     $_SESSION = array();
     session_destroy();
     setcookie(session_name(), '', time() - 3600, '/');
