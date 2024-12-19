@@ -37,12 +37,13 @@
         // true if the passwords match, false otherwise
         $are_passwords_same = are_passwords_same($password, $password_znovu); 
 
-        if(isAvalaible($email,$username) && $validated_email && $are_passwords_same && $validated_password
+        if(isAvalaible($email,$username) && $validated_email && $are_passwords_same && $validated_password === true
         &&$validated_username == "good"){
             $hashed_password = password_hash($password,PASSWORD_DEFAULT);
             addUser($email,$username,$hashed_password,$role);
             $_SESSION["username"] = $username;
             header("Location: index.php");
+            exit;
         }
     }
 ?>
