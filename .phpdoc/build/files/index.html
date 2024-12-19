@@ -84,14 +84,14 @@
     <article class="phpdocumentor-element -file">
         <h2 class="phpdocumentor-content__title">index.php</h2>
 
-            <p class="phpdocumentor-summary">Job: Display ads from a JSON file
-The page displays all ads from inzeraty.json, each as a link to a more
-detailed ad. The anchor element sets the target URL to inzerat.php?id=
-followed by the ad&#039;s ID. All ads are sorted in ascending order by
-dimensions. They are rendered using a foreach loop, iterating over the
-associative array from the JSON file.</p>
+            <p class="phpdocumentor-summary">Job: Display ads from a JSON file.</p>
 
-    <section class="phpdocumentor-description"><p>Pagination is implemented by setting a limit for the number of ads per
+    <section class="phpdocumentor-description"><p>The page displays all ads from inzeraty.json, each as a link to a more
+detailed ad. The anchor element sets the target URL to inzerat.php?id=
+followed by the ad's ID. All ads are sorted in ascending order by
+dimensions. They are rendered using a foreach loop, iterating over the
+associative array from the JSON file.
+Pagination is implemented by setting a limit for the number of ads per
 page. The URL is updated to reflect the current page. To determine the
 ads to display on the current page, the offset is calculated based on
 the current page (e.g., for page 3, the offset is (3 - 1) * limit). The

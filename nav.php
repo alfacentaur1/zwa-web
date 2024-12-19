@@ -1,4 +1,9 @@
-<!-- template for nav -->
+<?php
+    /**
+     * Job: Template for navigation bar.
+     */
+?>
+
 <div class="nav">
         <nav>
             <h1>Rentco.</h1>

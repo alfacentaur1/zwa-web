@@ -1,8 +1,9 @@
 <?php
 /**
- * Job: Show details about users profile. (users current session)
+ * Job: Show details about users profile(users current session). 
+ * 
  * The user can only access the page if they are logged in. Once logged in,
- *  the user is found in the users.json file using the username key from the 
+ * the user is found in the users.json file using the username key from the 
  * global $_SESSION variable, and the user details (username, email, role) 
  * are displayed from the JSON file.
  */

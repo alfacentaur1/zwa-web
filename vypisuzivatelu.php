@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Role management for admins.
+ * 
  * If the user is not logged in or is not an admin, they will be redirected
  *  to the login page. If the user is an admin, a list of users will be 
  * displayed using a foreach loop that processes users.json. For each user,

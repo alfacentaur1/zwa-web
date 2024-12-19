@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Update ad in json database.
+ * 
  * This page can be accessed through a link in the ad details. The user must
  *  be logged in and must be the owner of the ad to be able to edit it. This
  *  is checked using the SESSION global variable. The ad's ID is then 

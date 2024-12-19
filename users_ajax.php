@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Check if username is unique in registration form.
+ * 
  * The user loads data from the users.json file, then creates an array of 
  * usernames. After that, ajax.js sends an XMLHttpRequest with the username 
  * value, and users_ajax.php returns either the string "used" (taken) or 

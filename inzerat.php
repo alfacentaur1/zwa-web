@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Display ad details.
+ * 
  * The user can access this page by clicking on an ad on the index.php page.
  *  The ad is displayed based on the ID, which is retrieved from the GET 
  * superglobal variable. The code uses this ID to search for the 

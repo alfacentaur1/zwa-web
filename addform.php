@@ -1,6 +1,7 @@
 <?php
 /**
- *Job: Add advertisements into json database.
+ * Job: Add advertisements into json database.
+
  * The user must be logged in; otherwise, they are redirected to the login 
  * page. The user submits data, which is validated. If anything is wrong, 
  * the user is alerted, and the form is returned with the previously entered

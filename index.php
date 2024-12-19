@@ -1,6 +1,7 @@
 <?php
 /**
- * Job: Display ads from a JSON file
+ * Job: Display ads from a JSON file.
+ * 
  * The page displays all ads from inzeraty.json, each as a link to a more 
  * detailed ad. The anchor element sets the target URL to inzerat.php?id= 
  * followed by the ad's ID. All ads are sorted in ascending order by 

@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Delete ad.
+ * 
  * When the "Delete" button is clicked for a specific advertisement, its ID * is retrieved using the GET superglobal variable. The script then iterates * through all advertisements in the inzeraty.json file. If an  
  * advertisement's ID does not match the one retrieved from the GET 
  * variable, it is added to an array of remaining advertisements. This array 

@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Log users in.
+ * 
  * The user fills in the form fields. Upon submission, the input is 
  * validated again. If something is wrong (invalid input), the user is 
  * redirected back to the form with the previously filled-in data (using the

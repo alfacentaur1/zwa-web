@@ -1,6 +1,7 @@
 <?php
 /**
  * Job: Register new user.
+ * 
  * The user enters unique data into form fields, except for the password.
  *  When the form is submitted, all fields are validated. If there is an error, the form returns pre-filled and informs the user about what is 
  * wrong. Pre-filling is done via the POST global variable, with the form 
