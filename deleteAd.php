@@ -15,12 +15,28 @@ if(!isset($_SESSION["username"])){
     header("Location: login.php?error=$message");
     exit;
 }
+require_once "functions.php";
+$users = loadUsers();
+$current_user = null;
 
-require "functions.php";
 //load ads, then loop through, if id does not match add it to rest
 //replace inzeraty.json with rest
 $ads = loadAds();
 if(isset($_GET["id"])){
+    if(isset($_SESSION["username"])){
+        $current_user = getUser($_SESSION["username"]);
+        $user_id = $current_user["id"];
+        $ads = loadAds();
+        foreach($ads as $ad){
+            if($ad["id"] == $_GET["id"] && $current_user["role"] != "admin"){
+                if($user_id != $ad["user_id"]){
+                    header("Location: index.php");
+                    exit();
+                }
+            }
+        }
+    
+    }
     $rest = [];
     $ad_id = $_GET["id"];
     foreach($ads as $ad){
