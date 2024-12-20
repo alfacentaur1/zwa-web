@@ -15,7 +15,7 @@
 // If user is not logged in, redirect him
     require "header.php";
     if(!isset($_SESSION["username"])){
-        $message = urlencode("Je nutné přihlášení.");
+        $message = urlencode("1");
         header("Location: login.php?error=$message");
         exit;
     }

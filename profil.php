@@ -10,7 +10,7 @@
     require "header.php";
     // If there is no users session, redirect him to login
     if(!isset($_SESSION["username"])){
-        $message = urlencode("Je nutné přihlášení.");
+        $message = urlencode("1");
         header("Location: login.php?error=$message");
         exit;
     }

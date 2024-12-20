@@ -14,7 +14,7 @@
     require "header.php";
     // Check if the user is logged in and has admin rights
     if (!isset($_SESSION["username"]) || !isset($current_user) || $current_user["role"] != "admin") {
-        $message = urlencode("Nemáte práva.");  
+        $message = urlencode("2");  
         header("Location: login.php?error=$message");  
         exit;  
     }
@@ -23,14 +23,14 @@
     if (isset($_POST["submit"]) && !empty($users)) {
         // Loop through each user to update their role
         foreach ($users as &$user) {
-            $username = $user["username"];  
-            if (isset($_POST[$username])) {  
-                $user["role"] = $_POST[$username];  // Update users role
+            $id = $user["id"];  
+            if (isset($_POST[$id])) {  
+                $user["role"] = $_POST[$id];  // Update users role
             }
         }
     saveRoles($users);  // Save the updated users data with the new roles
     $users = loadUsers();  // Reload the users from the JSON file
-    header("Location: index.php?php=uspesne zmeneno");  
+    header("Location: index.php");  
     exit;  
 }
 
@@ -57,7 +57,7 @@
 
 foreach ($users as $user) {
     $id = htmlspecialchars($user["id"]);
-    $username = htmlspecialchars($user["username"]); 
+    $username = htmlspecialchars(($user["username"]));
     $role = htmlspecialchars($user["role"]); 
     echo "
 
@@ -66,7 +66,7 @@ foreach ($users as $user) {
                 <p>$username</p>
 
                     <label for=".trim($id).">Role</label>
-                    <select name='$username' id='".trim($id)."'>
+                    <select name='$id' id='".trim($id)."'>
                         <option value='admin' " . ($role == 'admin' ? 'selected' : '') . ">admin</option>
                         <option value='uzivatel' " . ($role == 'uzivatel' ? 'selected' : '') . ">uživatel</option>
                     </select>

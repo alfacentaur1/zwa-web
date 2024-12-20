@@ -91,7 +91,16 @@
                     }
                     if(isset($_GET["error"])){
                         $message = urldecode(htmlspecialchars($_GET["error"]));
-                        echo "<p class='php'>$message</p>";
+                        if($message == "1"){
+                            echo "<p class='php'>Je nutné přihlášení.</p>";
+                        }
+                        elseif($message == "2"){
+                            echo "<p class='php'>Nemáte práva.</p>";
+                        }
+                        elseif($message == "3"){
+                            echo "<p class='php'>Nastala chyba.</p>";
+                        }
+                        
                     }                
                 ?>
             </fieldset>

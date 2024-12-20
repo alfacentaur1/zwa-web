@@ -11,7 +11,7 @@
  */
 session_start();
 if(!isset($_SESSION["username"])){
-    $message = urlencode("Nastala chyba.");
+    $message = urlencode("2");
     header("Location: login.php?error=$message");
     exit;
 }
