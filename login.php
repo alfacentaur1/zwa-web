@@ -27,7 +27,7 @@
                         $_SESSION["username"] = $username;
                         // Redirect to index.php after successful login(PRG)
                         header("Location: index.php");
-                        exit;
+                        exit();
                     }
             }}}
     }else {

@@ -13,7 +13,7 @@ session_start();
 if(!isset($_SESSION["username"])){
     $message = urlencode("2");
     header("Location: login.php?error=$message");
-    exit;
+    exit();
 }
 require_once "functions.php";
 $users = loadUsers();
@@ -53,9 +53,9 @@ if (file_exists($image_path)) {
     unlink($image_path);
 } 
     header("Location: index.php");
-    exit;
+    exit();
 }else{
     header("Location: index.php?php=id nenalezeno");
-    exit;
+    exit();
 }
 ?>

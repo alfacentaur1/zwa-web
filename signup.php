@@ -43,7 +43,7 @@
             addUser($email,$username,$hashed_password,$role);
             $_SESSION["username"] = $username;
             header("Location: index.php");
-            exit;
+            exit();
         }
     }
 ?>

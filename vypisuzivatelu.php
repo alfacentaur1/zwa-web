@@ -16,7 +16,7 @@
     if (!isset($_SESSION["username"]) || !isset($current_user) || $current_user["role"] != "admin") {
         $message = urlencode("2");  
         header("Location: login.php?error=$message");  
-        exit;  
+        exit();  
     }
 
     // If the form is submitted and there are users to process
@@ -31,7 +31,7 @@
     saveRoles($users);  // Save the updated users data with the new roles
     $users = loadUsers();  // Reload the users from the JSON file
     header("Location: index.php");  
-    exit;  
+    exit();  
 }
 
 ?>

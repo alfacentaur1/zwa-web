@@ -7,7 +7,7 @@
     if(!isset($_SESSION["username"])){
         $message = urlencode("1");
         header("Location: login.php?error=$message");
-        exit;
+        exit();
     }
     // Destroy session
     $_SESSION = array();
@@ -17,5 +17,5 @@
     header("Pragma: no-cache");
     header("Expires: Thu, 19 Nov 1981 08:52:00 GMT");
     header("Location: login.php");
-    exit;
+    exit();
 ?>

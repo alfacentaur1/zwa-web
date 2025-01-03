@@ -17,7 +17,7 @@
     if(!isset($_SESSION["username"])){
         $message = urlencode("1");
         header("Location: login.php?error=$message");
-        exit;
+        exit();
     }
 
 
