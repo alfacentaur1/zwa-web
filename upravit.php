@@ -142,7 +142,7 @@ if (isset($_GET["id"])) {
                 <div class="form">
                     <!-- <input type="hidden" name ="user_id" value ="12" > -->
                     <input type="hidden" name="ad_id" value=<?php echo isset($_GET['id']) ? htmlspecialchars($_GET['id']) : ''; ?>
-  
+                    required
                     >
                     <label for="lokalita">Lokalita</label>
                     <input autocomplete = "off" type="text" name="lokalita" id="lokalita"
@@ -152,7 +152,7 @@ if (isset($_GET["id"])) {
                         }elseif(isset($lokalita)) {
                             echo "value='" .htmlspecialchars($lokalita)."'";
                         }
-                    ?>>
+                    ?>required>
                 </div>
                 <div class="form">
                     <div class="form" id="select">
@@ -165,7 +165,7 @@ if (isset($_GET["id"])) {
                             echo "value='" .htmlspecialchars($cena)."'";
                         }
                         ?>
-                        >
+                        required>
                         <select name="mena" id="cena-input">
                         <option value="czk" <?php echo (isset($_POST["mena"]) && $_POST["mena"] === "czk"|| isset($mena) && $mena == "czk")  ? "selected" : ""; ?>>czk</option>
                         <option value="eur" <?php echo (isset($_POST["mena"]) && $_POST["mena"] === "eur"|| isset($mena) && $mena == "eur") ? "selected" : ""; ?>>eur</option>
@@ -181,11 +181,11 @@ if (isset($_GET["id"])) {
                         echo "value='" .htmlspecialchars($rozmery)."'";
                     }
                     ?> 
-                    >
+                    required>
                 </div>
                 <div class="form">
                     <label for="popis" class="fieldset">Popis</label>
-                    <textarea name="popis" id="popis" cols="94" rows="15"><?php
+                    <textarea name="popis" id="popis" cols="94" rows="15" required><?php
                     if(isset($_POST["popis"])){
                         echo htmlspecialchars($_POST["popis"]);
                     }elseif(isset($popis)) {

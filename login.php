@@ -69,11 +69,11 @@
                         if(isset($username)){
                             echo "value='" .htmlspecialchars($username)."'";
                         }
-                    ?>>
+                    ?>required>
                 </div>
                 <div class="form">
                     <label for="password">Heslo</label>
-                    <input type="password" name="password" id="password" >
+                    <input type="password" name="password" id="password" required>
                 </div>
                 <div class="form">
                     <input type="submit" name="submit" class="submit">

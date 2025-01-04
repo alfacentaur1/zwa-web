@@ -140,14 +140,14 @@ if (empty($errors)) {
                     }
                     
                     ?>>
-                    <input type="hidden" name="ad_id" value=<?php echo strval(uniqid())?>>
+                    <input type="hidden" name="ad_id" value=<?php echo strval(uniqid())?>required>
                     <label for="lokalita">Lokalita</label>
                     <input autocomplete = "off" type="text" name="lokalita" id="lokalita"
                     <?php
                         if(isset($_POST["lokalita"])){
                             echo "value='" .htmlspecialchars($_POST["lokalita"])."'";
                         }
-                    ?>>
+                    ?>required>
                 </div>
                 <div class="form">
                     <div class="form" id="select">
@@ -158,6 +158,7 @@ if (empty($errors)) {
                             echo "value='" .htmlspecialchars($_POST["cena"])."'";
                         }
                         ?>
+                        required
                         >
                         <select name="mena" id="cena-input">
                         <option value="czk" <?php echo (isset($_POST['mena']) && $_POST['mena'] === 'czk') ? 'selected' : ''; ?>>czk</option>
@@ -172,6 +173,7 @@ if (empty($errors)) {
                         echo "value='" .htmlspecialchars($_POST["rozmery"])."'";
                     }
                     ?> 
+                    required
                     >
                 </div>
                 <div class="form">
@@ -184,7 +186,7 @@ if (empty($errors)) {
                     ?></textarea>
                 <div class="form" id="img">
                     <label for="img-input">Foto</label>
-                    <input type="file" name="img" id="img-input" accept="image/*">
+                    <input type="file" name="img" id="img-input" accept="image/*" required>
                 </div>
                 </div>
                 <div class="form">
