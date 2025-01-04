@@ -76,7 +76,7 @@
                     <h2>Vítejte</h2>
                 </div>
                 <div class="form">
-                    <label for="username" >Uživatelské jméno</label>
+                    <label for="username" >Uživatelské jméno *</label>
                     <input autocomplete = "off" type="text" id="username" name="username"
                     <?php
                         if(isset($username)){
@@ -87,7 +87,7 @@
                 <p class="hidden" id="hidden">username už je obsazené</p>
                 </div>
                 <div class="form">
-                    <label for="email">Email</label>
+                    <label for="email">Email *</label>
                     <input autocomplete = "off" type="email" id="email" name="email" 
                     <?php
                         if(isset($email)){
@@ -98,17 +98,18 @@
                 </div>
                 <input type="hidden" name="role" value="uzivatel">
                 <div class="form">
-                    <label for="password">Heslo</label>
+                    <label for="password">Heslo *</label>
                     <input type="password" id="password" name="password" required>
                 </div>
                 <div class="form">
-                    <label for="password_znovu">Heslo znovu</label>
+                    <label for="password_znovu">Heslo znovu *</label>
                     <input type="password" id="password_znovu" name="password_znovu" required>
                 </div>
                 <div class="form">
                     <input type="submit" name="submit" class="submit">
                 </div>
                 <p>Již máte účet? <a href="login.php">Přihlásit se</a></p>
+                <p>Pole označená * jsou povinná.
                 <p id="error_hesla">Hesla se neshodují</p>
                 <?php
                     if(isset($validated_username) && $validated_username !== "good") {
