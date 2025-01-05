@@ -4,17 +4,21 @@ function isEmailValid(e) {
     // if email do not contain . or @ function returns - 1 and if statement adds chyba class to email input
     //and prevents sending the document
     if (test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1) { 
-        test.classList.add("chyba");
         e.preventDefault();
+        test.classList.add("password");
+        let p = document.getElementById("error_email");
+        p.classList.add("error_hesla");
         
     }
 }
 // Function to prevent submission if  "@" or "." is missing in the email or both
 function isEmailSubmittable(e) {
     let test = document.getElementById("email");
+    let p = document.getElementById("error_email");
     if ((test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1) || 
     (test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1)) {
         e.preventDefault();
+        p.classList.add("error_hesla");
 
     }
 }
@@ -22,7 +26,7 @@ function isEmailSubmittable(e) {
 // check if passwords match
 function arePasswordsSame(e) {
     let pas1 = document.getElementById("password");
-    let pas2 = document.getElementById("password-znovu");
+    let pas2 = document.getElementById("password_znovu");
 
     if (pas1.value === pas2.value) {
         // password match
@@ -39,8 +43,8 @@ function arePasswordsSame(e) {
 }
 // validate the whole form before submission
 function isFormSubmittable(e) {
-    arePasswordsSame(e);
     isEmailValid(e);
+    arePasswordsSame(e);
 
 }
 // set event listeners

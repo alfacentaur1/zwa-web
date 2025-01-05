@@ -84,7 +84,7 @@
                         }
                     ?>
                     required>
-                <p class="hidden" id="hidden">username už je obsazené</p>
+                <p class="hidden" id="hidden">Username už je obsazené.</p>
                 </div>
                 <div class="form">
                     <label for="email">Email *</label>
@@ -95,6 +95,7 @@
                         }
                     ?>
                     required >
+                    <p id="error_email">Špatný formát emailu.</p>
                 </div>
                 <input type="hidden" name="role" value="uzivatel">
                 <div class="form">
