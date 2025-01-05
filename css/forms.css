@@ -163,7 +163,6 @@ input:focus  {
 #error_email {
     display:none;
     color:red;
-    font-weight: bold;
     margin:auto 0;
     margin-bottom:0;
     padding-bottom:0;
@@ -196,7 +195,6 @@ input:focus  {
 
 .hidden {
     display:none;
-    font-weight: bold;
     margin:auto 0;
 }
 
