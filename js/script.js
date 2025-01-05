@@ -1,30 +1,34 @@
 // check if email is valid - must contain @ and .
 function isEmailValid(e) {
     let test = document.getElementById("email");
+    let s = document.getElementById("error_email");
     // if email do not contain . or @ function returns - 1 and if statement adds chyba class to email input
     //and prevents sending the document
     if (test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1) { 
         e.preventDefault();
         test.classList.add("password");
-        let p = document.getElementById("error_email");
-        p.classList.add("error_hesla");
+        s.classList.add("error_hesla");
         
+    }else {
+        s.classList.remove("error_hesla");
+        test.classList.remove("password");
     }
 }
 // Function to prevent submission if  "@" or "." is missing in the email or both
 function isEmailSubmittable(e) {
     let test = document.getElementById("email");
-    let p = document.getElementById("error_email");
+    let k = document.getElementById("error_email");
     if ((test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1) || 
     (test.value.indexOf("@") === -1 || test.value.indexOf(".") === -1)) {
         e.preventDefault();
-        p.classList.add("error_hesla");
+        k.classList.add("error_hesla");
 
     }
 }
 
 // check if passwords match
 function arePasswordsSame(e) {
+    console.log("ahoj");
     let pas1 = document.getElementById("password");
     let pas2 = document.getElementById("password_znovu");
 
@@ -34,6 +38,7 @@ function arePasswordsSame(e) {
 
     else {
         // passwords do not match, prevent submitting form
+        console.log("hesla se neshoduji");
         e.preventDefault();
         let p = document.getElementById("error_hesla");
         p.classList.add("error_hesla");
@@ -43,8 +48,8 @@ function arePasswordsSame(e) {
 }
 // validate the whole form before submission
 function isFormSubmittable(e) {
-    isEmailValid(e);
     arePasswordsSame(e);
+    isEmailValid(e);
 
 }
 // set event listeners
